@@ -1,37 +1,14 @@
-'use client';
 import Link from 'next/link';
-import {ArrowUpRight, Menu, X} from 'lucide-react';
-import {useState} from 'react';
+import { ArrowUpRight } from 'lucide-react';
+import { Nav } from './Nav';
 
-const links = [
-  ['Services', '/services'],
-  ['How it works', '/how-it-works'],
-  ['About', '/about'],
-  ['Careers', '/careers'],
-  ['Contact', '/contact'],
-] as const;
-
-export function Nav(){
-  const [open,setOpen]=useState(false);
-  return <>
-    <nav className="nav">
-      <Link className="logo" href="/">SMG<span>®</span></Link>
-      <div className="links">{links.map(([name,href])=><Link key={href} href={href}>{name}</Link>)}</div>
-      <Link className="navcta" href="/get-started">Get started <ArrowUpRight size={15}/></Link>
-      <button className="mobile" onClick={()=>setOpen(!open)} aria-label="Menu">{open?<X/>:<Menu/>}</button>
-    </nav>
-    {open&&<div className="mobilemenu">
-      {links.map(([name,href])=><Link onClick={()=>setOpen(false)} key={href} href={href}>{name}</Link>)}
-      <Link onClick={()=>setOpen(false)} className="navcta" href="/get-started">Get started</Link>
-    </div>}
-  </>
-}
+export { Nav };
 
 export function Footer(){return <footer className="footer"><div className="shell footgrid">
   <div><Link className="logo" href="/">SMG<span>®</span></Link><p>Predictable lead flow for businesses ready to grow.</p></div>
-  <div><h4>Company</h4><Link href="/about">About</Link><br/><Link href="/careers">Careers</Link></div>
-  <div><h4>Services</h4><Link href="/services">Paid acquisition</Link><br/><Link href="/services">Lead qualification</Link><br/><Link href="/services">Booking automation</Link></div>
-  <div><h4>Start</h4><Link href="/get-started">Get started</Link><br/><Link href="/contact">Contact us</Link></div>
-</div><div className="shell copyright"><span>© 2026 Solomon Media Group. All rights reserved.</span><span>Built for businesses that want booked jobs, not just traffic.</span></div></footer>}
+  <div><h4>Company</h4><Link href="/about">About</Link><br/><Link href="/careers">Careers</Link><br/><Link href="/contact">Contact</Link></div>
+  <div><h4>Services</h4><Link href="/services">Services</Link><br/><Link href="/services/lead-generation">Lead Generation</Link><br/><Link href="/services/sarah">Sarah AI Receptionist</Link></div>
+  <div><h4>Start</h4><Link href="/get-started">Get Started</Link><br/><Link href="/client-login">Client Login</Link></div>
+</div><div className="shell copyright"><span>© 2026 Solomon Media Group. All rights reserved.</span><span>Built for businesses that want booked opportunities, not just traffic.</span></div></footer>}
 
 export function Layout({children}:{children:React.ReactNode}){return <><Nav/>{children}<Footer/></>}
