@@ -1,0 +1,24 @@
+{
+  "roles": [
+    {
+      "id": "growth-strategist",
+      "title": "Growth Strategist",
+      "type": "Full-time",
+      "location": "Remote / United States",
+      "department": "Growth",
+      "description": "Own strategy and execution across acquisition, conversion, and growth systems for SMG clients.",
+      "active": true,
+      "applyEmail": "careers@solomedia.group"
+    },
+    {
+      "id": "ai-automation-specialist",
+      "title": "AI & Automation Specialist",
+      "type": "Full-time",
+      "location": "Remote / United States",
+      "department": "AI & Automation",
+      "description": "Design, deploy, and improve AI receptionist and business automation systems for clients.",
+      "active": true,
+      "applyEmail": "careers@solomedia.group"
+    }
+  ]
+}
