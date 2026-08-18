@@ -70,7 +70,16 @@ export function Nav() {
 
   return (
     <header className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
+      <svg className={styles.liquidFilter} aria-hidden="true" focusable="false">
+        <defs>
+          <filter id="smg-liquid-glass" x="-20%" y="-20%" width="140%" height="140%" colorInterpolationFilters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018 0.045" numOctaves="2" seed="17" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </defs>
+      </svg>
       <div className={styles.inner}>
+        <span className={styles.specular} aria-hidden="true" />
         <Link href="/" className={styles.brand} onClick={closeMobile} aria-label="Solomon Media Group home">
           SMG<span className={styles.brandMark}>®</span>
         </Link>
@@ -78,24 +87,13 @@ export function Nav() {
         <div className={styles.group}>
           <nav className={styles.links} aria-label="Primary">
             <div className={styles.item} ref={aboutRef} onMouseEnter={openAbout} onMouseLeave={closeAboutDelayed}>
-              <button
-                className={`${styles.link} ${isActive('/about') || isActive('/careers') || isActive('/contact') ? styles.active : ''}`}
-                type="button"
-                aria-haspopup="true"
-                aria-expanded={aboutOpen}
-                onClick={() => setAboutOpen(v => !v)}
-              >
+              <button className={`${styles.link} ${isActive('/about') || isActive('/careers') || isActive('/contact') ? styles.active : ''}`} type="button" aria-haspopup="true" aria-expanded={aboutOpen} onClick={() => setAboutOpen(v => !v)}>
                 About <ChevronDown size={14} className={`${styles.chevron} ${aboutOpen ? styles.chevronOpen : ''}`} />
               </button>
               <div className={`${styles.dropdown} ${aboutOpen ? styles.dropdownOpen : ''}`} role="menu" aria-label="About">
-                {ABOUT_LINKS.map(link => (
-                  <Link key={link.href} href={link.href} role="menuitem" className={`${styles.dropdownLink} ${isActive(link.href) ? styles.dropdownActive : ''}`} onClick={() => setAboutOpen(false)}>
-                    {link.label}
-                  </Link>
-                ))}
+                {ABOUT_LINKS.map(link => <Link key={link.href} href={link.href} role="menuitem" className={`${styles.dropdownLink} ${isActive(link.href) ? styles.dropdownActive : ''}`} onClick={() => setAboutOpen(false)}>{link.label}</Link>)}
               </div>
             </div>
-
             <Link href="/services" className={`${styles.link} ${isActive('/services') ? styles.active : ''}`}>Services</Link>
             <Link href="/how-it-works" className={`${styles.link} ${isActive('/how-it-works') ? styles.active : ''}`}>How It Works</Link>
             <Link href="/client-login" className={`${styles.link} ${isActive('/client-login') ? styles.active : ''}`}>Client Login</Link>
@@ -103,18 +101,14 @@ export function Nav() {
 
           <div className={styles.right}>
             <Link href="/get-started" className={styles.cta}>Get Started</Link>
-            <button type="button" className={styles.menuBtn} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen(v => !v)}>
-              {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-            </button>
+            <button type="button" className={styles.menuBtn} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen(v => !v)}>{mobileOpen ? <X size={18} /> : <Menu size={18} />}</button>
           </div>
         </div>
       </div>
 
       <div className={`${styles.sheet} ${mobileOpen ? styles.sheetOpen : ''}`} aria-hidden={!mobileOpen}>
         <Link href="/about" className={isActive('/about') ? styles.mobileActive : ''} onClick={closeMobile}>About</Link>
-        <div className={styles.sheetSub}>
-          {ABOUT_LINKS.slice(1).map(link => <Link key={link.href} href={link.href} className={isActive(link.href) ? styles.mobileActive : ''} onClick={closeMobile}>{link.label}</Link>)}
-        </div>
+        <div className={styles.sheetSub}>{ABOUT_LINKS.slice(1).map(link => <Link key={link.href} href={link.href} className={isActive(link.href) ? styles.mobileActive : ''} onClick={closeMobile}>{link.label}</Link>)}</div>
         <Link href="/services" className={isActive('/services') ? styles.mobileActive : ''} onClick={closeMobile}>Services</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? styles.mobileActive : ''} onClick={closeMobile}>How It Works</Link>
         <Link href="/client-login" className={isActive('/client-login') ? styles.mobileActive : ''} onClick={closeMobile}>Client Login</Link>
