@@ -15,7 +15,14 @@ export default function Careers(){
         <div><h3>{role.title}</h3><p>{role.description}</p></div>
         <div className="career-meta"><span>{role.type}</span><span>{role.location}</span></div>
         <a className="career-apply" href={`mailto:${role.applyEmail}?subject=${encodeURIComponent(`Application: ${role.title}`)}`}>Apply for this role <span>→</span></a>
-      </article>)}</div> : <div className="card"><h3>No open positions right now.</h3><p>We don't currently have an active opening, but we're always interested in exceptional people.</p><Link className="btn" href="mailto:careers@solomedia.group">Introduce yourself</Link></div>}
+      </article>)}
+      <article className="career-card general-card">
+        <div className="career-top"><span className="tag">GENERAL APPLICATION</span><span className="career-arrow">↗</span></div>
+        <div><h3>Don't see your role?</h3><p>If none of our current openings fit, or every position is already filled, we'd still like to hear from exceptional people.</p></div>
+        <div className="career-meta"><span>Future opportunities</span><span>Open application</span></div>
+        <a className="career-apply" href="mailto:careers@solomedia.group?subject=General%20Application">Send a general application <span>→</span></a>
+      </article>
+      </div> : <div className="careers-grid"><article className="career-card general-card"><div className="career-top"><span className="tag">GENERAL APPLICATION</span><span className="career-arrow">↗</span></div><div><h3>No role right now? That's okay.</h3><p>We don't currently have an active opening, but we're always interested in exceptional people. Send us your background and tell us where you think you can make an impact.</p></div><div className="career-meta"><span>Future opportunities</span><span>Open application</span></div><a className="career-apply" href="mailto:careers@solomedia.group?subject=General%20Application">Send a general application <span>→</span></a></article></div>}
     </section>
 
     <section className="careers-note"><div className="career-note-grid"><div><span className="tag">HOW WE HIRE</span><h2>Small team.<br/>High ownership.</h2></div><p>We care more about what you can build than whether you fit a rigid job description. We look for people who move quickly, think commercially, communicate clearly, and take responsibility for outcomes.</p></div></section>
