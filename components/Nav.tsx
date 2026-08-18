@@ -62,7 +62,7 @@ export function Nav() {
   };
 
   const closeAboutDelayed = () => {
-    closeTimer.current = setTimeout(() => setAboutOpen(false), 120);
+    closeTimer.current = setTimeout(() => setAboutOpen(false), 180);
   };
 
   const closeMobile = () => setMobileOpen(false);
@@ -70,16 +70,7 @@ export function Nav() {
 
   return (
     <header className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
-      <svg className={styles.liquidFilter} aria-hidden="true" focusable="false">
-        <defs>
-          <filter id="smg-liquid-glass" x="-20%" y="-20%" width="140%" height="140%" colorInterpolationFilters="sRGB">
-            <feTurbulence type="fractalNoise" baseFrequency="0.018 0.045" numOctaves="2" seed="17" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="9" xChannelSelector="R" yChannelSelector="G" />
-          </filter>
-        </defs>
-      </svg>
       <div className={styles.inner}>
-        <span className={styles.specular} aria-hidden="true" />
         <Link href="/" className={styles.brand} onClick={closeMobile} aria-label="Solomon Media Group home">
           SMG<span className={styles.brandMark}>®</span>
         </Link>
@@ -87,11 +78,21 @@ export function Nav() {
         <div className={styles.group}>
           <nav className={styles.links} aria-label="Primary">
             <div className={styles.item} ref={aboutRef} onMouseEnter={openAbout} onMouseLeave={closeAboutDelayed}>
-              <button className={`${styles.link} ${isActive('/about') || isActive('/careers') || isActive('/contact') ? styles.active : ''}`} type="button" aria-haspopup="true" aria-expanded={aboutOpen} onClick={() => setAboutOpen(v => !v)}>
+              <Link
+                href="/about"
+                className={`${styles.link} ${isActive('/about') || isActive('/careers') || isActive('/contact') ? styles.active : ''}`}
+                aria-haspopup="true"
+                aria-expanded={aboutOpen}
+                onClick={() => setAboutOpen(false)}
+              >
                 About <ChevronDown size={14} className={`${styles.chevron} ${aboutOpen ? styles.chevronOpen : ''}`} />
-              </button>
+              </Link>
               <div className={`${styles.dropdown} ${aboutOpen ? styles.dropdownOpen : ''}`} role="menu" aria-label="About">
-                {ABOUT_LINKS.map(link => <Link key={link.href} href={link.href} role="menuitem" className={`${styles.dropdownLink} ${isActive(link.href) ? styles.dropdownActive : ''}`} onClick={() => setAboutOpen(false)}>{link.label}</Link>)}
+                {ABOUT_LINKS.map(link => (
+                  <Link key={link.href} href={link.href} role="menuitem" className={`${styles.dropdownLink} ${isActive(link.href) ? styles.dropdownActive : ''}`} onClick={() => setAboutOpen(false)}>
+                    {link.label}
+                  </Link>
+                ))}
               </div>
             </div>
             <Link href="/services" className={`${styles.link} ${isActive('/services') ? styles.active : ''}`}>Services</Link>
