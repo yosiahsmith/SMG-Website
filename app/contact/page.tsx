@@ -2,8 +2,6 @@
 
 import { FormEvent, useState } from 'react';
 
-export const metadata = { title: 'Contact | Solomon Media Group', description: 'Contact Solomon Media Group.' };
-
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
