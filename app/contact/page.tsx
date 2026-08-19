@@ -1,3 +1,20 @@
-export const metadata = { title: 'Contact', description: 'Talk with Solomon Media Group about growth, lead flow, AI, and business systems.' };
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 
-export default function Contact(){return <main className="page"><div className="shell"><span className="eyebrow">CONTACT</span><h1>Let's talk about growth.</h1><p className="lead">Tell us what you're trying to accomplish and where lead flow is breaking down. We'll take it from there.</p><section><form className="form"><div className="field"><label>Name</label><input placeholder="Your name"/></div><div className="field"><label>Work email</label><input type="email" placeholder="you@company.com"/></div><div className="field"><label>Company</label><input placeholder="Company name"/></div><div className="field"><label>What are you trying to solve?</label><textarea placeholder="Tell us a little about your business and current lead flow."/></div><button className="btn" type="button">Send inquiry</button></form></section></div></main>}
+export const metadata = { title: 'Contact', description: 'Talk with Solomon Media Group about Lead Acquisition or Sarah AI Receptionist.' };
+
+export default function Contact() {
+  return (
+    <main className="page contact-page">
+      <div className="shell">
+        <span className="eyebrow">CONTACT SMG</span>
+        <h1>Start with the problem.<br /><em>We'll talk about the system.</em></h1>
+        <p className="lead">Whether you need more qualified demand or a better way to handle inbound opportunities, the easiest place to start is a conversation.</p>
+        <section className="contact-options">
+          <Link className="contact-option" href="/get-started"><span>01</span><h2>Book a discovery call</h2><p>Tell us what you sell, where growth is getting stuck, and what you want more of.</p><strong>Get started <ArrowUpRight size={16} /></strong></Link>
+          <div className="contact-option"><span>02</span><h2>Know what you need?</h2><p>Explore the two current SMG offerings before you book: Lead Acquisition and Sarah AI Receptionist.</p><strong><Link href="/services">View services <ArrowUpRight size={16} /></Link></strong></div>
+        </section>
+      </div>
+    </main>
+  );
+}
