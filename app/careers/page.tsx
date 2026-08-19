@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import careers from '../../data/careers.json';
 
+export const metadata = { title: 'Careers', description: 'Explore open positions and opportunities to join Solomon Media Group.' };
+
 export default function Careers(){
   const openRoles = careers.roles.filter(role => role.active);
   return <main className="page careers-page"><div className="shell">
