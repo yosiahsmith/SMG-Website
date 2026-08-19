@@ -12,6 +12,17 @@ const ABOUT_LINKS = [
   { label: 'Contact', href: '/contact' },
 ];
 
+function LogoMark() {
+  return (
+    <svg className={styles.logoMark} viewBox="0 0 500 500" aria-hidden="true">
+      <circle cx="250" cy="250" r="181" fill="none" stroke="currentColor" strokeWidth="8" />
+      <text x="250" y="273" textAnchor="middle" fontFamily="Arial, Helvetica, sans-serif" fontSize="61" fontWeight="400" letterSpacing="-3" fill="currentColor">Solomon</text>
+      <path d="M112 281 H388" fill="none" stroke="currentColor" strokeWidth="5" />
+      <text x="250" y="299" textAnchor="middle" fontFamily="Arial, Helvetica, sans-serif" fontSize="12" letterSpacing="7" fill="currentColor">MEDIA GROUP</text>
+    </svg>
+  );
+}
+
 export function Nav() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -72,7 +83,7 @@ export function Nav() {
     <header className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.brand} onClick={closeMobile} aria-label="Solomon Media Group home">
-          SMG<span className={styles.brandMark}>®</span>
+          <LogoMark />
         </Link>
 
         <div className={styles.group}>
