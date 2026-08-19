@@ -1,4 +1,4 @@
-import GetStartedForm from '@/components/GetStartedForm';
+import GetStartedForm from './GetStartedForm';
 
 export const metadata = {
   title: 'Get Started | Solomon Media Group',
@@ -10,7 +10,7 @@ export default function GetStarted() {
     <main className="page get-started-page">
       <div className="shell">
         <span className="eyebrow">GET STARTED</span>
-        <h1>Let's figure out where the opportunity is.</h1>
+        <h1>Let&apos;s figure out where the opportunity is.</h1>
         <p className="lead">Tell us what you sell, who you serve, and what you want more of. The first conversation is about fit—not forcing a package onto your business.</p>
 
         <section className="start-options">
