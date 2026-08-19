@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+export const metadata = { title: 'Services', description: 'Explore Solomon Media Group services and products, including lead generation and Sarah AI Receptionist.' };
+
 const services = [
   {n:'01', title:'Lead Generation', text:'A performance-driven acquisition system built to generate qualified opportunities for businesses that want predictable demand.', href:'/services/lead-generation', label:'Explore lead generation'},
   {n:'02', title:'Sarah AI Receptionist', text:'Our AI receptionist product answers calls, handles common questions, qualifies callers, and helps businesses turn inbound calls into booked opportunities.', href:'/services/sarah', label:'Explore Sarah'},
