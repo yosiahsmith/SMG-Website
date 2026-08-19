@@ -1,5 +1,94 @@
-import Link from 'next/link';import {ArrowUpRight,Check} from 'lucide-react';
+import Link from 'next/link';
+import { ArrowUpRight, ArrowRight } from 'lucide-react';
 
-export const metadata = { title: 'Home', description: 'Solomon Media Group builds predictable lead flow, AI, automation, and growth systems for businesses ready to grow.' };
+export const metadata = {
+  title: 'Home',
+  description: 'Solomon Media Group builds growth infrastructure through Lead Acquisition and Sarah AI Receptionist.',
+};
 
-export default function Home(){return <><main><section className="hero"><div className="shell"><span className="eyebrow">DESIGNED TO SCALE</span><h1>Predictable lead flow for businesses <em>ready to grow.</em></h1><p>We build and manage paid acquisition systems that deliver qualified prospects straight to your calendar—without cold outreach or wasted spend.</p><div className="actions"><Link className="btn" href="/get-started">Get started <ArrowUpRight size={16}/></Link><Link className="btn secondary" href="/how-it-works">See how it works</Link></div></div></section><section><div className="shell"><div className="section-head"><h2>More opportunities.<br/>Less chasing.</h2><p>Solomon Media Group exists to eliminate inconsistent lead flow for businesses that are tired of hunting for customers.</p></div><div className="grid"><div className="card"><span className="num">01</span><h3>Paid acquisition</h3><p>Campaigns designed around qualified demand, not vanity metrics.</p></div><div className="card"><span className="num">02</span><h3>Lead qualification</h3><p>Turn raw inquiries into real opportunities with smarter qualification flows.</p></div><div className="card"><span className="num">03</span><h3>Booking automation</h3><p>Move prospects from interest to scheduled conversations without unnecessary friction.</p></div></div></div></section><section><div className="shell"><div className="section-head"><h2>Built around<br/>booked jobs.</h2><p>You don't need more marketing. You need a system that produces opportunities and makes them visible from first touch to booked appointment.</p></div><div className="grid"><div className="card"><Check/><h3>Quality over traffic</h3><p>Every campaign starts with the customer you actually want.</p></div><div className="card"><Check/><h3>Connected pipeline</h3><p>Leads can flow directly into your phone, CRM, and sales process.</p></div><div className="card"><Check/><h3>Real visibility</h3><p>Understand what is happening inside your acquisition system in real time.</p></div></div></div></section><div className="band"><div className="shell"><h2>If your calendar isn't full, that's a lead flow problem.</h2><p>You already have the team, skills, and ability to deliver great work. We build the system that brings new opportunities consistently.</p><div className="actions"><Link className="btn darkbtn" href="/get-started">Start a conversation <ArrowUpRight size={16}/></Link></div></div></div></main></>}
+export default function Home() {
+  return (
+    <main>
+      <section className="hero hero-home">
+        <div className="shell hero-grid">
+          <div className="hero-copy">
+            <span className="eyebrow">SOLOMON MEDIA GROUP / GROWTH INFRASTRUCTURE</span>
+            <h1>Turn demand into <em>real opportunities.</em></h1>
+            <p className="hero-lead">SMG connects acquisition, qualification, booking, and AI into systems built around the economics of your business—not vanity metrics.</p>
+            <div className="actions">
+              <Link className="btn" href="/get-started">Get started <ArrowUpRight size={16} /></Link>
+              <Link className="btn secondary" href="/how-it-works">See how it works <ArrowRight size={16} /></Link>
+            </div>
+          </div>
+          <div className="hero-system" aria-label="SMG growth infrastructure overview">
+            <div className="system-label">THE SYSTEM</div>
+            <div className="system-node system-primary">DEMAND</div>
+            <div className="system-line" />
+            <div className="system-row">
+              <div className="system-node">QUALIFY</div>
+              <div className="system-node">BOOK</div>
+            </div>
+            <div className="system-line short" />
+            <div className="system-node system-result">OPPORTUNITY</div>
+            <p>One connected path from attention to a customer conversation.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="intro-section">
+        <div className="shell split-intro">
+          <div>
+            <span className="eyebrow">WHAT SMG ACTUALLY DOES</span>
+            <h2>Two products.<br />One philosophy.</h2>
+          </div>
+          <p>We are not trying to sell you six different agency services. SMG currently focuses on two real offerings: Lead Acquisition and Sarah, our AI Receptionist.</p>
+        </div>
+      </section>
+
+      <section className="offer-section">
+        <div className="shell offer-grid">
+          <Link className="offer-card offer-featured" href="/services/lead-generation">
+            <div className="offer-number">01</div>
+            <div>
+              <span className="offer-kicker">LEAD ACQUISITION</span>
+              <h3>Qualified demand, from ad to booked job.</h3>
+              <p>Meta Ads, lead qualification, and job booking brought together as one end-to-end acquisition system.</p>
+            </div>
+            <span className="offer-link">Explore Lead Acquisition <ArrowUpRight size={17} /></span>
+          </Link>
+          <Link className="offer-card" href="/services/sarah">
+            <div className="offer-number">02</div>
+            <div>
+              <span className="offer-kicker">SARAH / AI RECEPTIONIST</span>
+              <h3>Your front desk, without another full-time employee.</h3>
+              <p>Sarah handles inbound calls, scheduling, confirmations, transfers, and routine conversations around the clock.</p>
+            </div>
+            <span className="offer-link">Meet Sarah <ArrowUpRight size={17} /></span>
+          </Link>
+        </div>
+      </section>
+
+      <section className="principles-section">
+        <div className="shell">
+          <div className="section-head compact-head">
+            <div><span className="eyebrow">THE SMG APPROACH</span><h2>Built for outcomes,<br />not activity.</h2></div>
+            <p>The point of a growth system is not to generate more dashboards. It is to create a more dependable path to the customers your business actually wants.</p>
+          </div>
+          <div className="principle-grid">
+            <div className="principle"><span>01</span><h3>Business-first</h3><p>Offers, markets, economics, and sales capacity come before campaign setup.</p></div>
+            <div className="principle"><span>02</span><h3>Connected</h3><p>Acquisition does not stop at a lead. Qualification and the next action matter.</p></div>
+            <div className="principle"><span>03</span><h3>Measurable</h3><p>We care about qualified opportunities and booked business, not vanity metrics.</p></div>
+            <div className="principle"><span>04</span><h3>Built to improve</h3><p>The system gets better as performance data and customer information accumulate.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section className="band band-home">
+        <div className="shell band-grid">
+          <div><span className="eyebrow light-eyebrow">READY WHEN YOU ARE</span><h2>Build a system your business can actually grow on.</h2></div>
+          <div><p>Tell us what you sell, who you serve, and where growth is getting stuck. We will figure out whether SMG is the right fit.</p><Link className="btn darkbtn" href="/get-started">Start a conversation <ArrowUpRight size={16} /></Link></div>
+        </div>
+      </section>
+    </main>
+  );
+}
