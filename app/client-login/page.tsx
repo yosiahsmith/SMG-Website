@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+export const metadata = { title: 'Client Login', description: 'SMG client portal access. The client portal is coming soon.' };
+
 export default function ClientLoginPage(){
   return <main className="page notfound"><div className="shell" style={{textAlign:'center'}}>
     <span className="eyebrow">CLIENT PORTAL</span>
