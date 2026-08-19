@@ -1,14 +1,37 @@
 import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
 
-export const metadata = { title: 'Services', description: 'Explore Solomon Media Group services and products, including lead generation and Sarah AI Receptionist.' };
+export const metadata = { title: 'Services', description: 'Explore Solomon Media Group Lead Acquisition and Sarah AI Receptionist.' };
 
-const services = [
-  {n:'01', title:'Lead Generation', text:'A performance-driven acquisition system built to generate qualified opportunities for businesses that want predictable demand.', href:'/services/lead-generation', label:'Explore lead generation'},
-  {n:'02', title:'Sarah AI Receptionist', text:'Our AI receptionist product answers calls, handles common questions, qualifies callers, and helps businesses turn inbound calls into booked opportunities.', href:'/services/sarah', label:'Explore Sarah'},
-  {n:'03', title:'Paid Acquisition', text:'Campaigns built around the economics of your offer, audience, market, and sales process—not vanity metrics.', href:'/services/lead-generation', label:'View acquisition'},
-  {n:'04', title:'Lead Qualification', text:'Qualification systems that help your team spend more time with prospects who actually fit the business.', href:'/services/lead-generation', label:'Learn more'},
-  {n:'05', title:'Booking & Automation', text:'Calls, calendars, forms, follow-up, and automation connected so opportunities do not sit untouched.', href:'/services/sarah', label:'See automation'},
-  {n:'06', title:'Growth Systems', text:'An operating layer connecting acquisition, conversion, and customer experience around measurable business outcomes.', href:'/get-started', label:'Talk to SMG'}
-];
+export default function Services() {
+  return (
+    <main className="page services-page">
+      <div className="shell">
+        <span className="eyebrow">SERVICES & PRODUCTS</span>
+        <h1>Two ways to build a stronger front end for growth.</h1>
+        <p className="lead">SMG is a performance-oriented growth agency focused on the systems that create and capture demand. Right now, that means two offerings.</p>
 
-export default function Services(){return <main className="page"><div className="shell"><span className="eyebrow">SERVICES & PRODUCTS</span><h1>Growth infrastructure for modern businesses.</h1><p className="lead">SMG is no longer just a lead generation company. We build acquisition, AI, automation, and conversion systems that help businesses create and capture more demand.</p><section className="steps">{services.map(s=><div className="step" key={s.n}><div className="stepno">{s.n}</div><div><h3>{s.title}</h3><p>{s.text}</p><Link className="textlink" href={s.href}>{s.label} →</Link></div></div>)}</section><div className="actions"><Link className="btn" href="/get-started">Get started</Link></div></div></main>}
+        <section className="service-showcase">
+          <Link className="service-large-card" href="/services/lead-generation">
+            <div className="service-card-top"><span>01 / LEAD ACQUISITION</span><ArrowUpRight size={21} /></div>
+            <div className="service-card-body"><h2>Qualified demand.<br /><em>Built around your business.</em></h2><p>Meta Ads, lead qualification, and job booking as one connected acquisition offer. We build around your market, offer economics, and sales process—not a generic campaign template.</p></div>
+            <div className="service-card-bottom"><span>Paid acquisition</span><span>Qualification</span><span>Booking</span><span>Optimization</span></div>
+          </Link>
+
+          <Link className="service-large-card sarah-card" href="/services/sarah">
+            <div className="service-card-top"><span>02 / SARAH AI RECEPTIONIST</span><ArrowUpRight size={21} /></div>
+            <div className="service-card-body"><h2>Your always-on<br /><em>front desk.</em></h2><p>Sarah answers inbound calls, handles routine questions, schedules appointments, sends confirmations, transfers calls, and helps businesses capture opportunities that would otherwise be missed.</p></div>
+            <div className="service-card-bottom"><span>Calls</span><span>Scheduling</span><span>Confirmations</span><span>Transfers</span></div>
+          </Link>
+        </section>
+
+        <section className="service-note">
+          <div><span className="eyebrow">WHY ONLY TWO?</span><h2>Because the pieces work better together than they sound on a menu.</h2></div>
+          <p>Paid acquisition, qualification, booking, and automation are capabilities inside the systems we build—not six separate services we are trying to sell you.</p>
+        </section>
+
+        <div className="actions page-actions"><Link className="btn" href="/get-started">Talk to SMG <ArrowUpRight size={16} /></Link></div>
+      </div>
+    </main>
+  );
+}
