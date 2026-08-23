@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation';
 import styles from './Nav.module.css';
 
 const ABOUT_LINKS = [
+  { label: 'Meet the Team', href: '/about#team' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -36,37 +37,21 @@ export function Nav() {
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
+  useEffect(() => { setAboutOpen(false); setMobileOpen(false); }, [pathname]);
   useEffect(() => {
-    setAboutOpen(false);
-    setMobileOpen(false);
-  }, [pathname]);
-
-  useEffect(() => {
-    const onClickOutside = (e: MouseEvent) => {
-      if (aboutRef.current && !aboutRef.current.contains(e.target as Node)) setAboutOpen(false);
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') { setAboutOpen(false); setMobileOpen(false); }
-    };
+    const onClickOutside = (e: MouseEvent) => { if (aboutRef.current && !aboutRef.current.contains(e.target as Node)) setAboutOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setAboutOpen(false); setMobileOpen(false); } };
     document.addEventListener('click', onClickOutside);
     document.addEventListener('keydown', onKey);
-    return () => {
-      document.removeEventListener('click', onClickOutside);
-      document.removeEventListener('keydown', onKey);
-      if (closeTimer.current) clearTimeout(closeTimer.current);
-    };
+    return () => { document.removeEventListener('click', onClickOutside); document.removeEventListener('keydown', onKey); if (closeTimer.current) clearTimeout(closeTimer.current); };
   }, []);
-
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
-  }, [mobileOpen]);
+  useEffect(() => { document.body.style.overflow = mobileOpen ? 'hidden' : ''; return () => { document.body.style.overflow = ''; }; }, [mobileOpen]);
 
   const openAbout = () => { if (closeTimer.current) clearTimeout(closeTimer.current); setAboutOpen(true); };
   const closeAboutDelayed = () => { closeTimer.current = setTimeout(() => setAboutOpen(false), 180); };
   const closeMobile = () => setMobileOpen(false);
   const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
+  const aboutActive = pathname.startsWith('/about') || pathname.startsWith('/careers') || pathname.startsWith('/contact');
 
   return (
     <header className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
@@ -75,7 +60,7 @@ export function Nav() {
         <div className={styles.group}>
           <nav className={styles.links} aria-label="Primary">
             <div className={styles.item} ref={aboutRef} onMouseEnter={openAbout} onMouseLeave={closeAboutDelayed}>
-              <Link href="/about" className={`${styles.link} ${isActive('/about') || isActive('/careers') || isActive('/contact') ? styles.active : ''}`} aria-haspopup="true" aria-expanded={aboutOpen} onClick={() => setAboutOpen(false)}>
+              <Link href="/about" className={`${styles.link} ${aboutActive ? styles.active : ''}`} aria-haspopup="true" aria-expanded={aboutOpen} onClick={() => setAboutOpen(false)}>
                 About <ChevronDown size={14} className={`${styles.chevron} ${aboutOpen ? styles.chevronOpen : ''}`} />
               </Link>
               <div className={`${styles.dropdown} ${aboutOpen ? styles.dropdownOpen : ''}`} role="menu" aria-label="About">
@@ -86,10 +71,7 @@ export function Nav() {
             <Link href="/how-it-works" className={`${styles.link} ${isActive('/how-it-works') ? styles.active : ''}`}>How It Works</Link>
             <Link href="/client-login" className={`${styles.link} ${isActive('/client-login') ? styles.active : ''}`}>Client Login</Link>
           </nav>
-          <div className={styles.right}>
-            <Link href="/get-started" className={styles.cta}>Get Started</Link>
-            <button type="button" className={styles.menuBtn} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen(v => !v)}>{mobileOpen ? <X size={18} /> : <Menu size={18} />}</button>
-          </div>
+          <div className={styles.right}><Link href="/get-started" className={styles.cta}>Get Started</Link><button type="button" className={styles.menuBtn} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen(v => !v)}>{mobileOpen ? <X size={18} /> : <Menu size={18} />}</button></div>
         </div>
       </div>
       <div className={`${styles.sheet} ${mobileOpen ? styles.sheetOpen : ''}`} aria-hidden={!mobileOpen}>
