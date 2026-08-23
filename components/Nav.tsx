@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 import styles from './Nav.module.css';
 
 const ABOUT_LINKS = [
-  { label: 'About SMG', href: '/about' },
   { label: 'Careers', href: '/careers' },
   { label: 'Contact', href: '/contact' },
 ];
@@ -48,10 +47,7 @@ export function Nav() {
       if (aboutRef.current && !aboutRef.current.contains(e.target as Node)) setAboutOpen(false);
     };
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        setAboutOpen(false);
-        setMobileOpen(false);
-      }
+      if (e.key === 'Escape') { setAboutOpen(false); setMobileOpen(false); }
     };
     document.addEventListener('click', onClickOutside);
     document.addEventListener('keydown', onKey);
@@ -67,25 +63,15 @@ export function Nav() {
     return () => { document.body.style.overflow = ''; };
   }, [mobileOpen]);
 
-  const openAbout = () => {
-    if (closeTimer.current) clearTimeout(closeTimer.current);
-    setAboutOpen(true);
-  };
-
-  const closeAboutDelayed = () => {
-    closeTimer.current = setTimeout(() => setAboutOpen(false), 180);
-  };
-
+  const openAbout = () => { if (closeTimer.current) clearTimeout(closeTimer.current); setAboutOpen(true); };
+  const closeAboutDelayed = () => { closeTimer.current = setTimeout(() => setAboutOpen(false), 180); };
   const closeMobile = () => setMobileOpen(false);
   const isActive = (href: string) => href === '/' ? pathname === '/' : pathname.startsWith(href);
 
   return (
     <header className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
       <div className={styles.inner}>
-        <Link href="/" className={styles.brand} onClick={closeMobile} aria-label="Solomon Media Group home">
-          <LogoMark />
-        </Link>
-
+        <Link href="/" className={styles.brand} onClick={closeMobile} aria-label="Solomon Media Group home"><LogoMark /></Link>
         <div className={styles.group}>
           <nav className={styles.links} aria-label="Primary">
             <div className={styles.item} ref={aboutRef} onMouseEnter={openAbout} onMouseLeave={closeAboutDelayed}>
@@ -93,9 +79,7 @@ export function Nav() {
                 About <ChevronDown size={14} className={`${styles.chevron} ${aboutOpen ? styles.chevronOpen : ''}`} />
               </Link>
               <div className={`${styles.dropdown} ${aboutOpen ? styles.dropdownOpen : ''}`} role="menu" aria-label="About">
-                {ABOUT_LINKS.map(link => (
-                  <Link key={link.href} href={link.href} role="menuitem" className={`${styles.dropdownLink} ${isActive(link.href) ? styles.dropdownActive : ''}`} onClick={() => setAboutOpen(false)}>{link.label}</Link>
-                ))}
+                {ABOUT_LINKS.map(link => <Link key={link.href} href={link.href} role="menuitem" className={`${styles.dropdownLink} ${isActive(link.href) ? styles.dropdownActive : ''}`} onClick={() => setAboutOpen(false)}>{link.label}</Link>)}
               </div>
             </div>
             <Link href="/services" className={`${styles.link} ${isActive('/services') ? styles.active : ''}`}>Services</Link>
@@ -110,7 +94,7 @@ export function Nav() {
       </div>
       <div className={`${styles.sheet} ${mobileOpen ? styles.sheetOpen : ''}`} aria-hidden={!mobileOpen}>
         <Link href="/about" className={isActive('/about') ? styles.mobileActive : ''} onClick={closeMobile}>About</Link>
-        <div className={styles.sheetSub}>{ABOUT_LINKS.slice(1).map(link => <Link key={link.href} href={link.href} className={isActive(link.href) ? styles.mobileActive : ''} onClick={closeMobile}>{link.label}</Link>)}</div>
+        <div className={styles.sheetSub}>{ABOUT_LINKS.map(link => <Link key={link.href} href={link.href} className={isActive(link.href) ? styles.mobileActive : ''} onClick={closeMobile}>{link.label}</Link>)}</div>
         <Link href="/services" className={isActive('/services') ? styles.mobileActive : ''} onClick={closeMobile}>Services</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? styles.mobileActive : ''} onClick={closeMobile}>How It Works</Link>
         <Link href="/client-login" className={isActive('/client-login') ? styles.mobileActive : ''} onClick={closeMobile}>Client Login</Link>
