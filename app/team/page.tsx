@@ -5,7 +5,7 @@ import TeamGrid, { TeamMember } from '../../components/TeamGrid';
 export const metadata = { title: 'Meet the Team | Solomon Media Group', description: 'Meet the people building Solomon Media Group.' };
 
 const members: TeamMember[] = [
-  { name: 'Yosiah Smith', email: 'ysmith@solomedia.group', title: 'FOUNDER & CEO', pfp: '', overview: 'Building SMG around growth infrastructure, AI reception, acquisition, and the systems that connect them.', bio: 'Focused on building useful technology and scalable systems that turn business growth into something repeatable.' },
+  { name: 'Yosiah Smith', email: 'ysmith@solomedia.group', title: 'FOUNDER', position: 'CEO', pfp: '', overview: 'Building SMG around growth infrastructure, AI reception, acquisition, and the systems that connect them.', bio: 'Focused on building useful technology and scalable systems that turn business growth into something repeatable.' },
 ];
 
 export default function Team() {
