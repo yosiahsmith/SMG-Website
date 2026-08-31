@@ -1,0 +1,21 @@
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import styles from './ChessEgg.module.css';
+
+type Piece={t:string;c:'w'|'b'}; type Board=(Piece|null)[][];
+const back=['r','n','b','q','k','b','n','r'];
+const glyph:Record<string,string>={wk:'♔',wq:'♕',wr:'♖',wb:'♗',wn:'♘',wp:'♙',bk:'♚',bq:'♛',br:'♜',bb:'♝',bn:'♞',bp:'♟'};
+const start=():Board=>Array.from({length:8},(_,r)=>Array.from({length:8},(_,c)=>r===0?{t:back[c],c:'b'}:r===1?{t:'p',c:'b'}:r===6?{t:'p',c:'w'}:r===7?{t:back[c],c:'w'}:null));
+const inside=(r:number,c:number)=>r>=0&&r<8&&c>=0&&c<8;
+function moves(b:Board,r:number,c:number):[number,number][]{const p=b[r][c];if(!p)return[];const out:[number,number][]=[];const add=(rr:number,cc:number)=>{if(inside(rr,cc)&&(!b[rr][cc]||b[rr][cc]!.c!==p.c))out.push([rr,cc])};
+ if(p.t==='p'){const d=p.c==='w'?-1:1;if(inside(r+d,c)&&!b[r+d][c]){out.push([r+d,c]);const sr=p.c==='w'?6:1;if(r===sr&&!b[r+2*d][c])out.push([r+2*d,c])}for(const dc of[-1,1]){const rr=r+d,cc=c+dc;if(inside(rr,cc)&&b[rr][cc]&&b[rr][cc]!.c!==p.c)out.push([rr,cc])}}
+ if(p.t==='n')for(const [dr,dc]of[[2,1],[2,-1],[-2,1],[-2,-1],[1,2],[1,-2],[-1,2],[-1,-2]])add(r+dr,c+dc);
+ if(['b','r','q'].includes(p.t)){const dirs=p.t==='b'?[[1,1],[1,-1],[-1,1],[-1,-1]]:p.t==='r'?[[1,0],[-1,0],[0,1],[0,-1]]:[[1,1],[1,-1],[-1,1],[-1,-1],[1,0],[-1,0],[0,1],[0,-1]];for(const [dr,dc]of dirs){let rr=r+dr,cc=c+dc;while(inside(rr,cc)){if(!b[rr][cc])out.push([rr,cc]);else{if(b[rr][cc]!.c!==p.c)out.push([rr,cc]);break}rr+=dr;cc+=dc}}}
+ if(p.t==='k')for(const dr of[-1,0,1])for(const dc of[-1,0,1])if(dr||dc)add(r+dr,c+dc);return out}
+function allMoves(b:Board,c:'w'|'b'){const a:{from:[number,number];to:[number,number]}[]=[];for(let r=0;r<8;r++)for(let x=0;x<8;x++)if(b[r][x]?.c===c)for(const to of moves(b,r,x))a.push({from:[r,x],to});return a}
+function clone(b:Board){return b.map(row=>row.map(p=>p?{...p}:null))}
+function apply(b:Board,from:[number,number],to:[number,number]){const n=clone(b);const p=n[from[0]][from[1]]!;n[to[0]][to[1]]=p;n[from[0]][from[1]]=null;if(p.t==='p'&&(to[0]===0||to[0]===7))p.t='q';return n}
+export default function ChessEgg({onClose}:{onClose:()=>void}){const [b,setB]=useState(start);const [sel,setSel]=useState<[number,number]|null>(null);const [turn,setTurn]=useState<'w'|'b'>('w');const [status,setStatus]=useState('Your move.');const timer=useRef<number|null>(null);
+ useEffect(()=>()=>{if(timer.current)window.clearTimeout(timer.current)},[]);
+ const choose=(r:number,c:number)=>{if(turn!=='w')return;const p=b[r][c];if(sel){const legal=moves(b,sel[0],sel[1]);if(legal.some(([rr,cc])=>rr===r&&cc===c)){const nb=apply(b,sel,[r,c]);setB(nb);setSel(null);setTurn('b');setStatus('Solomon is thinking…');timer.current=window.setTimeout(()=>{const ms=allMoves(nb,'b');if(!ms.length){setStatus('Checkmate.');setTurn('w');return}const mv=ms[Math.floor(Math.random()*ms.length)];const after=apply(nb,mv.from,mv.to);setB(after);setTurn('w');setStatus('Your move.');},280);return}setSel(p?.c==='w'?[r,c]:null);return}if(p?.c==='w')setSel([r,c])};
+ return <div className={styles.overlay} onMouseDown={e=>e.target===e.currentTarget&&onClose()}><div className={styles.modal}><button className={styles.close} onClick={onClose} aria-label="Close chess">×</button><div className={styles.top}><div><span className={styles.kicker}>SOLOMON</span><h2>Chess.</h2><p>{status}</p></div><button className={styles.reset} onClick={()=>{setB(start());setSel(null);setTurn('w');setStatus('Your move.')}}>New game</button></div><div className={styles.board} role="grid" aria-label="Chess board">{b.map((row,r)=>row.map((p,c)=><button key={`${r}-${c}`} className={`${styles.square} ${(r+c)%2?'dark':'light'} ${sel?.[0]===r&&sel?.[1]===c?styles.selected:''} ${sel&&moves(b,sel[0],sel[1]).some(([rr,cc])=>rr===r&&cc===c)?styles.target:''}`} onClick={()=>choose(r,c)} aria-label={`${String.fromCharCode(97+c)}${8-r}`}>{p&&glyph[p.c+p.t]}</button>))}</div><div className={styles.note}>A hidden game for the curious. Nothing more. Nothing less.</div></div></div>}
