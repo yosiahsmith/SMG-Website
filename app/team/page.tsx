@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
-import TeamGrid, { TeamMember } from '@/components/TeamGrid';
+import TeamGrid, { TeamMember } from '../../components/TeamGrid';
 
 export const metadata = { title: 'Meet the Team | Solomon Media Group', description: 'Meet the people building Solomon Media Group.' };
 
