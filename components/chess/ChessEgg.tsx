@@ -2,106 +2,23 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Chess } from 'chess.js';
 import styles from './ChessEgg.module.css';
-
-type Promotion = 'q' | 'r' | 'b' | 'n';
-type Move = { from: string; to: string; promotion?: Promotion; san?: string; captured?: string; flags?: string };
-const files = ['a','b','c','d','e','f','g','h'];
-const START_FEN = new Chess().fen();
-const pawnPath='M12 3c-2 0-3 2-3 4 0 1 .5 2 1.5 2.7C8 10.5 6 13 6 16h12c0-3-2-5.5-4.5-6.3C14.5 9 15 8 15 7c0-2-1-4-3-4Zm-5 15h10v3H7z';
-const glyph:Record<string,string>={r:'♜',n:'♞',b:'♝',q:'♛',k:'♚'};
-function PieceIcon({type,color}:{type:string;color:'w'|'b'}){if(type==='p')return <svg className={`${styles.piece} ${color==='w'?styles.whitePiece:styles.blackPiece}`} viewBox="0 0 24 24" aria-hidden="true"><path d={pawnPath}/></svg>;return <span className={`${styles.pieceGlyph} ${color==='w'?styles.whitePiece:styles.blackPiece}`} aria-hidden="true">{glyph[type]}</span>}
-function cloneGame(fen:string){return new Chess(fen)}
-
+type Promotion='q'|'r'|'b'|'n'; type Move={from:string;to:string;promotion?:Promotion;san?:string;captured?:string}; type Difficulty='easy'|'normal'|'hard'|'expert'; type Side='w'|'b'; type Clock='none'|5|10|15|30;
+const files=['a','b','c','d','e','f','g','h']; const START_FEN=new Chess().fen(); const pawnPath='M12 3c-2 0-3 2-3 4 0 1 .5 2 1.5 2.7C8 10.5 6 13 6 16h12c0-3-2-5.5-4.5-6.3C14.5 9 15 8 15 7c0-2-1-4-3-4Zm-5 15h10v3H7z'; const glyph:Record<string,string>={r:'♜',n:'♞',b:'♝',q:'♛',k:'♚'};
+function PieceIcon({type,color}:{type:string;color:'w'|'b'}){if(type==='p')return <svg className={`${styles.piece} ${color==='w'?styles.whitePiece:styles.blackPiece}`} viewBox="0 0 24 24"><path d={pawnPath}/></svg>;return <span className={`${styles.pieceGlyph} ${color==='w'?styles.whitePiece:styles.blackPiece}`}>{glyph[type]}</span>}
+const value:Record<string,number>={p:100,n:320,b:330,r:500,q:900,k:20000};
+function moveScore(m:Move,d:Difficulty){const capture=m.captured?value[m.captured]||0:0;const check=m.san?.includes('+')||m.san?.includes('#')?d==='expert'?500:d==='hard'?300:150:0;return capture+check+Math.random()*({easy:500,normal:180,hard:60,expert:12}[d]||60)}
 export default function ChessEgg({onClose}:{onClose:()=>void}){
- const [fen,setFen]=useState(START_FEN);
- const [selected,setSelected]=useState<string|null>(null);
- const [promotion,setPromotion]=useState<Move|null>(null);
- const [status,setStatus]=useState('Your move.');
- const [thinking,setThinking]=useState(false);
- const [lastMove,setLastMove]=useState<{from:string;to:string}|null>(null);
- const timer=useRef<number|null>(null);
- const game=useMemo(()=>cloneGame(fen),[fen]);
- const board=game.board();
- const legal=useMemo(()=>selected&&game.turn()==='w'?game.moves({square:selected as any,verbose:true}) as Move[]:[],[game,selected]);
- const legalTargets=new Set(legal.map(m=>m.to));
- useEffect(()=>()=>{if(timer.current!==null)window.clearTimeout(timer.current)},[]);
- const scheduleBlackMove=(baseFen:string)=>{
-   if(timer.current!==null)window.clearTimeout(timer.current);
-   timer.current=window.setTimeout(()=>{
-     timer.current=null;
-     const g=cloneGame(baseFen);
-     if(g.turn()!=='b'||g.isGameOver())return;
-     const moves=g.moves({verbose:true}) as Move[];
-     if(!moves.length){setThinking(false);return}
-     const captures=moves.filter(m=>Boolean(m.captured));
-     const checks=moves.filter(m=>m.san?.includes('+')||m.san?.includes('#'));
-     const pool=checks.length?checks:(captures.length?captures:moves);
-     const choice=pool[Math.floor(Math.random()*pool.length)];
-     try{
-       const played=g.move({from:choice.from,to:choice.to,promotion:choice.promotion||'q'});
-       setFen(g.fen());
-       setLastMove({from:played.from,to:played.to});
-       setSelected(null);
-       setPromotion(null);
-       if(g.isCheckmate()){setStatus('Checkmate — Solomon wins.');setThinking(false);return}
-       if(g.isStalemate()){setStatus('Stalemate.');setThinking(false);return}
-       if(g.isThreefoldRepetition()){setStatus('Draw — threefold repetition.');setThinking(false);return}
-       if(g.isDrawByFiftyMoves()){setStatus('Draw — 50-move rule.');setThinking(false);return}
-       if(g.isInsufficientMaterial()){setStatus('Draw — insufficient material.');setThinking(false);return}
-       setThinking(false);
-       setStatus(g.inCheck()?'Check — your king is attacked.':'Your move.');
-     }catch{
-       setThinking(false);setStatus('Your move.');
-     }
-   },420);
- };
- const commitPlayerMove=(move:Move)=>{
-   try{
-     const g=cloneGame(fen);
-     const played=g.move({from:move.from,to:move.to,promotion:move.promotion});
-     setFen(g.fen());
-     setLastMove({from:played.from,to:played.to});
-     setSelected(null);
-     setPromotion(null);
-     if(g.isCheckmate()){setStatus('Checkmate — you win.');setThinking(false);return}
-     if(g.isStalemate()){setStatus('Stalemate.');setThinking(false);return}
-     if(g.isThreefoldRepetition()){setStatus('Draw — threefold repetition.');setThinking(false);return}
-     if(g.isDrawByFiftyMoves()){setStatus('Draw — 50-move rule.');setThinking(false);return}
-     if(g.isInsufficientMaterial()){setStatus('Draw — insufficient material.');setThinking(false);return}
-     setThinking(true);
-     setStatus(g.inCheck()?'Check — Solomon is in check.':'Solomon is thinking…');
-     scheduleBlackMove(g.fen());
-   }catch{setSelected(null);setPromotion(null);}
- };
- const choose=(square:string)=>{
-   if(thinking||promotion||game.isGameOver()||game.turn()!=='w')return;
-   const piece=game.get(square as any);
-   if(selected){
-     const move=legal.find(m=>m.to===square);
-     if(move){
-       if(move.promotion){setPromotion(move);return}
-       commitPlayerMove(move);return;
-     }
-     setSelected(piece?.color==='w'?square:null);return;
-   }
-   if(piece?.color==='w')setSelected(square);
- };
- const promote=(type:Promotion)=>{
-   if(!promotion||thinking||game.turn()!=='w')return;
-   commitPlayerMove({...promotion,promotion:type});
- };
- const reset=()=>{
-   if(timer.current!==null)window.clearTimeout(timer.current);
-   timer.current=null;
-   setFen(START_FEN);setSelected(null);setPromotion(null);setLastMove(null);setThinking(false);setStatus('Your move.');
- };
- return <div className={styles.overlay} onMouseDown={e=>e.target===e.currentTarget&&onClose()}><div className={styles.modal}>
-   <button className={styles.close} onClick={onClose} aria-label="Close chess">×</button>
-   <div className={styles.top}><div><span className={styles.kicker}>SOLOMON</span><h2>Chess.</h2><p>{status}</p></div><button className={styles.reset} onClick={reset}>New game</button></div>
-   <div className={styles.board} role="grid" aria-label="Chess board">
-    {board.map((row,r)=>row.map((piece,c)=>{const square=`${files[c]}${8-r}`;const isLast=lastMove?.from===square||lastMove?.to===square;const isSelected=selected===square;const isTarget=legalTargets.has(square);return <button key={square} className={`${styles.square} ${(r+c)%2?styles.dark:styles.light} ${isLast?styles.last:''} ${isSelected?styles.selected:''} ${isTarget?styles.target:''}`} onClick={()=>choose(square)} aria-label={square}>{piece&&<PieceIcon type={piece.type} color={piece.color}/>}</button>}))}
-   </div>
-   {promotion&&<div className={styles.promotion}><span>Promote pawn</span><div>{(['q','r','b','n'] as Promotion[]).map(type=><button key={type} onClick={()=>promote(type)} aria-label={`Promote to ${type}`}><PieceIcon type={type} color="w"/></button>)}</div></div>}
-   <div className={styles.note}>A hidden game for the curious. Nothing more. Nothing less.</div>
- </div></div>
-}
+ const [fen,setFen]=useState(START_FEN),[selected,setSelected]=useState<string|null>(null),[promotion,setPromotion]=useState<Move|null>(null),[status,setStatus]=useState('Choose your game.'),[thinking,setThinking]=useState(false),[lastMove,setLastMove]=useState<{from:string;to:string}|null>(null),[setup,setSetup]=useState(true),[difficulty,setDifficulty]=useState<Difficulty>('normal'),[side,setSide]=useState<Side>('w'),[clock,setClock]=useState<Clock>('none'),[whiteTime,setWhiteTime]=useState(0),[blackTime,setBlackTime]=useState(0); const timer=useRef<number|null>(null); const game=useMemo(()=>new Chess(fen),[fen]); const board=game.board(); const legal=useMemo(()=>selected&&game.turn()===side?game.moves({square:selected as any,verbose:true}) as Move[]:[],[game,selected,side]); const targets=new Set(legal.map(m=>m.to));
+ const clearTimer=()=>{if(timer.current!==null){window.clearTimeout(timer.current);timer.current=null}}; useEffect(()=>()=>clearTimer(),[]);
+ const gameOver=(g:Chess)=>g.isGameOver();
+ const finish=(g:Chess,m:Move)=>{setFen(g.fen());setLastMove({from:m.from,to:m.to});setSelected(null);setPromotion(null);if(g.isCheckmate()){setStatus(g.turn()===side?'Checkmate — Solomon wins.':'Checkmate — you win.');setThinking(false);return true}if(g.isStalemate()){setStatus('Stalemate.');setThinking(false);return true}if(g.isThreefoldRepetition()){setStatus('Draw — threefold repetition.');setThinking(false);return true}if(g.isDrawByFiftyMoves()){setStatus('Draw — 50-move rule.');setThinking(false);return true}if(g.isInsufficientMaterial()){setStatus('Draw — insufficient material.');setThinking(false);return true}const your=g.turn()===side;setThinking(!your);setStatus(g.inCheck()?(your?'Check — your king is attacked.':'Check — Solomon is in check.'):(your?'Your move.':'Solomon is thinking…'));return false};
+ const blackMove=(base:string)=>{const g=new Chess(base);const ai:Side=side==='w'?'b':'w';if(g.turn()!==ai||g.isGameOver())return;const moves=g.moves({verbose:true}) as Move[];if(!moves.length){setThinking(false);return}const ranked=[...moves].sort((a,b)=>moveScore(b,difficulty)-moveScore(a,difficulty));const pool=difficulty==='easy'?ranked.slice(0,Math.min(10,ranked.length)):difficulty==='normal'?ranked.slice(0,Math.min(6,ranked.length)):difficulty==='hard'?ranked.slice(0,Math.min(3,ranked.length)):ranked.slice(0,Math.min(2,ranked.length));const m=pool[Math.floor(Math.random()*pool.length)];try{const played=g.move({from:m.from,to:m.to,promotion:m.promotion||'q'});finish(g,played as Move)}catch{setThinking(false);setStatus('Your move.')}};
+ const scheduleAI=(base:string)=>{clearTimer();timer.current=window.setTimeout(()=>{timer.current=null;blackMove(base)},420)};
+ const commit=(m:Move)=>{try{const g=new Chess(fen);const played=g.move({from:m.from,to:m.to,promotion:m.promotion});const over=finish(g,played as Move);if(!over&&g.turn()!=='side'){/* no-op */}if(!over&&g.turn()!=='side')scheduleAI(g.fen())}catch{setSelected(null);setPromotion(null)}};
+ const start=()=>{clearTimer();const g=new Chess();setFen(g.fen());setSelected(null);setPromotion(null);setLastMove(null);setWhiteTime(clock==='none'?0:Number(clock)*60);setBlackTime(clock==='none'?0:Number(clock)*60);setSetup(false);setThinking(side==='b');setStatus(side==='b'?'Solomon is thinking…':'Your move.');if(side==='b')scheduleAI(g.fen())};
+ useEffect(()=>{if(setup||clock==='none'||game.isGameOver())return;const id=window.setInterval(()=>{if(game.turn()==='w')setWhiteTime(t=>Math.max(0,t-1));else setBlackTime(t=>Math.max(0,t-1))},1000);return()=>window.clearInterval(id)},[fen,setup,clock,game]);
+ useEffect(()=>{if(setup||clock==='none'||game.isGameOver())return;const userTime=side==='w'?whiteTime:blackTime;if(userTime<=0){clearTimer();setThinking(false);setStatus('Time — game over.')}},[whiteTime,blackTime,setup,clock,side,game]);
+ const choose=(sq:string)=>{if(setup||thinking||promotion||game.isGameOver()||game.turn()!==side)return;const piece=game.get(sq as any);if(selected){const m=legal.find(x=>x.to===sq);if(m){if(m.promotion){setPromotion(m);return}commit(m);return}setSelected(piece?.color===side?sq:null);return}if(piece?.color===side)setSelected(sq)};
+ const promote=(type:Promotion)=>{if(!promotion||thinking)return;commit({...promotion,promotion:type})};
+ const fmt=(s:number)=>`${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`; const reset=()=>{clearTimer();setSetup(true);setThinking(false);setStatus('Choose your game.');setFen(START_FEN);setSelected(null);setPromotion(null);setLastMove(null)};
+ return <div className={styles.overlay} onMouseDown={e=>e.target===e.currentTarget&&onClose()}><div className={styles.modal}><button className={styles.close} onClick={onClose} aria-label="Close chess">×</button><div className={styles.top}><div><span className={styles.kicker}>SOLOMON</span><h2>Chess.</h2><p>{status}</p></div>{!setup&&<button className={styles.reset} onClick={reset}>New game</button>}</div>{setup?<div className={styles.setup}><label>Difficulty<select value={difficulty} onChange={e=>setDifficulty(e.target.value as Difficulty)}><option value="easy">Easy</option><option value="normal">Normal</option><option value="hard">Hard</option><option value="expert">Expert</option></select></label><label>Time<select value={clock} onChange={e=>setClock(e.target.value==='none'?'none':Number(e.target.value) as Clock)}><option value="none">No clock</option><option value="5">5 min</option><option value="10">10 min</option><option value="15">15 min</option><option value="30">30 min</option></select></label><label>Play as<select value={side} onChange={e=>setSide(e.target.value as Side)}><option value="w">White</option><option value="b">Black</option></select></label><button className={styles.start} onClick={start}>Start Game</button></div>:<><div className={styles.clockRow}>{clock!=='none'&&<><span>White {fmt(whiteTime)}</span><span>Black {fmt(blackTime)}</span></>}</div><div className={styles.board}>{board.map((row,r)=>row.map((piece,c)=>{const sq=`${files[c]}${8-r}`;return <button key={sq} className={`${styles.square} ${(r+c)%2?styles.dark:styles.light} ${lastMove?.from===sq||lastMove?.to===sq?styles.last:''} ${selected===sq?styles.selected:''} ${targets.has(sq)?styles.target:''}`} onClick={()=>choose(sq)}>{piece&&<PieceIcon type={piece.type} color={piece.color}/>}</button>}))}</div>{promotion&&<div className={styles.promotion}><span>Promote pawn</span><div>{(['q','r','b','n'] as Promotion[]).map(t=><button key={t} onClick={()=>promote(t)}><PieceIcon type={t} color={side}/></button>)}</div></div>}</>}<div className={styles.note}>A hidden game for the curious. Nothing more. Nothing less.</div></div></div>}
