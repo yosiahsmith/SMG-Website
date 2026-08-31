@@ -18,12 +18,12 @@ export default function ChessEgg({onClose}:{onClose:()=>void}){
  const [status,setStatus]=useState('Your move.');
  const [thinking,setThinking]=useState(false);
  const [lastMove,setLastMove]=useState<{from:string;to:string}|null>(null);
- const timer=useRef<ReturnType<typeof window.setTimeout>|null>(null);
+ const timer=useRef<number|null>(null);
  const game=useMemo(()=>cloneGame(fen),[fen]);
  const board=game.board();
  const legal=useMemo(()=>selected?game.moves({square:selected as any,verbose:true}) as Move[]:[],[game,selected]);
  const legalTargets=new Set(legal.map(m=>m.to));
- useEffect(()=>()=>{if(timer.current)window.clearTimeout(timer.current)},[]);
+ useEffect(()=>()=>{if(timer.current!==null)window.clearTimeout(timer.current)},[]);
  const finishPosition=(g:Chess,m:Move)=>{
    setFen(g.fen());
    setLastMove({from:m.from,to:m.to});
@@ -69,7 +69,7 @@ export default function ChessEgg({onClose}:{onClose:()=>void}){
      if(!g.isGameOver()){setThinking(true);timer.current=window.setTimeout(()=>blackMove(g.fen()),420)}
    }catch{setPromotion(null)}
  };
- const reset=()=>{if(timer.current)window.clearTimeout(timer.current);const g=new Chess();setFen(g.fen());setSelected(null);setPromotion(null);setLastMove(null);setThinking(false);setStatus('Your move.')};
+ const reset=()=>{if(timer.current!==null)window.clearTimeout(timer.current);const g=new Chess();setFen(g.fen());setSelected(null);setPromotion(null);setLastMove(null);setThinking(false);setStatus('Your move.')};
  return <div className={styles.overlay} onMouseDown={e=>e.target===e.currentTarget&&onClose()}><div className={styles.modal}>
    <button className={styles.close} onClick={onClose} aria-label="Close chess">×</button>
    <div className={styles.top}><div><span className={styles.kicker}>SOLOMON</span><h2>Chess.</h2><p>{status}</p></div><button className={styles.reset} onClick={reset}>New game</button></div>
