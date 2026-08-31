@@ -5,9 +5,9 @@ import { Nav } from './Nav';
 import ChessEgg from './chess/ChessEgg';
 export { Nav };
 const socials=[
-{name:'Facebook',href:'https://www.facebook.com/SolomonMediaGroupLLC',icon:<svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-0.7 0-1 0.3-1 1v2h3v4h-3v4h-4v-4H6v-4h3V9c0-3 1.7-5 5-5Z"/></svg>},
+{name:'Facebook',href:'https://www.facebook.com/SolomonMediaGroupLLC',icon:<svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-0.7 0-1 0-1 1v2h3v4h-3v4h-4v-4H6v-4h3V9c0-3 1.7-5 5-5Z"/></svg>},
 {name:'X',href:'https://x.com/solomedia_group',icon:<svg viewBox="0 0 24 24"><path fill="currentColor" d="M5 4h4.1l3.2 4.5L16.2 4H19l-5.4 6.1L19.5 20h-4.1l-3.8-5.2L6.9 20H4l5.7-6.5L5 4Z"/></svg>},
-{name:'TikTok',href:'https://www.tiktok.com/@solomedia.group',icon:<svg viewBox="0 0 24 24"><path fill="currentColor" d="M15 4h3c.3 1.8 1.4 3.1 3 3.7v3.1c-1.2 0-2.3-.4-3.3-1v5.1c0 3.4-2.2 5.4-5.3 5.4-3 0-5.2-1.9-5.2-4.8 0-3.1 2.4-5 5.8-4.7v3c-1.8-.2-2.7.5-2.7 1.7 0 1 .8 1.7 1.9 1.7 1.2 0 1.8-.8 1.8-2.4V4Z"/></svg>},
+{name:'TikTok',href:'https://www.tiktok.com/@solomedia.group',icon:<svg viewBox="0 0 24 24"><path fill="currentColor" d="M15 4h3c.3 1.8 1.4 3.1 3 3.7v3.1c-1.2 0-2.3-.4-3.3-1v5.1c0 3.4-2.2 5.4-5.3 5.4-3 0-5.2-1.9-5.2-4.8 0-3.1 2.4-5 5.8-4.7v3c-1.8-.2-2.7.5-2.7 1.7-1.8-.2-2.7.5-2.7 1.7 0 1 .8 1.7 1.9 1.7 1.2 0 1.8-.8 1.8-2.4V4Z"/></svg>},
 {name:'YouTube',href:'https://www.youtube.com/@SolomonMediaGroup',icon:<svg viewBox="0 0 24 24"><path fill="currentColor" d="M21 7.2c-.2-1.1-1-1.9-2.1-2.1C17.2 4.8 15.5 4.7 12 4.7s-5.2.1-6.9.4C4 5.3 3.2 6.1 3 7.2c-.3 1.5-.4 3.1-.4 4.8s.1 3.3.4 4.8c.2 1.1 1 1.9 2.1 2.1 1.7.3 3.4.4 6.9.4s5.2-.1 6.9-.4c1.1-.2 1.9-1 2.1-2.1.3-1.5 1-1.9 2.1-2.1 1.7-.3 3.4-.4 6.9-.4s5.2.1 6.9.4C20 18.1 20.8 17.3 21 16.2Z"/></svg>},
 {name:'Instagram',href:'https://www.instagram.com/solomon_media_group',icon:<svg viewBox="0 0 24 24"><rect fill="none" stroke="currentColor" strokeWidth="2" x="4" y="4" width="16" height="16" rx="4"/><circle fill="none" stroke="currentColor" strokeWidth="2" cx="12" cy="12" r="3.5"/><circle fill="currentColor" cx="17.2" cy="6.8" r="1"/></svg>}
 ];
