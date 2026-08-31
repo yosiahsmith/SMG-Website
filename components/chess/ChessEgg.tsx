@@ -35,11 +35,13 @@ export default function ChessEgg({onClose}:{onClose:()=>void}){
    if(g.isDrawByFiftyMoves()){setStatus('Draw — 50-move rule.');setThinking(false);return}
    if(g.isInsufficientMaterial()){setStatus('Draw — insufficient material.');setThinking(false);return}
    const inCheck=g.inCheck();
-   setStatus(inCheck?(g.turn()==='w'?'Check — your king is attacked.':'Check — Solomon is in check.'):(g.turn()==='w'?'Your move.':'Solomon is thinking…'));
+   const yourTurn=g.turn()==='w';
+   setThinking(!yourTurn);
+   setStatus(inCheck?(yourTurn?'Check — your king is attacked.':'Check — Solomon is in check.'):(yourTurn?'Your move.':'Solomon is thinking…'));
  };
  const blackMove=(baseFen:string)=>{
    const g=cloneGame(baseFen);if(g.turn()!=='b'||g.isGameOver())return;
-   const moves=g.moves({verbose:true}) as Move[];if(!moves.length)return;
+   const moves=g.moves({verbose:true}) as Move[];if(!moves.length){setThinking(false);return}
    const captures=moves.filter(m=>m.captured);const checks=moves.filter(m=>m.san?.includes('+')||m.san?.includes('#'));
    const pool=checks.length?checks:captures.length?captures:moves;
    const m=pool[Math.floor(Math.random()*pool.length)];
@@ -54,7 +56,7 @@ export default function ChessEgg({onClose}:{onClose:()=>void}){
        if(move.promotion){setPromotion(move);return}
        try{
          const g=cloneGame(fen);const played=g.move({from:move.from,to:move.to});finishPosition(g,played as Move);
-         if(!g.isGameOver()){setThinking(true);timer.current=window.setTimeout(()=>{blackMove(g.fen())},420)}
+         if(!g.isGameOver()){setThinking(true);timer.current=window.setTimeout(()=>blackMove(g.fen()),420)}
        }catch{setSelected(null)}
        return;
      }
