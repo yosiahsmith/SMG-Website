@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import { Nav } from './Nav';
-import ChessEgg from './ChessEgg';
+import ChessEgg from './chess/ChessEgg';
 export { Nav };
 const socials=[
 {name:'Facebook',href:'https://www.facebook.com/SolomonMediaGroupLLC',icon:<svg viewBox="0 0 24 24"><path fill="currentColor" d="M14 8h3V4h-3c-3.3 0-5 2-5 5v3H6v4h3v4h4v-4h3.5l.5-4H13V9c0-.7.3-1 1-1Z"/></svg>},
