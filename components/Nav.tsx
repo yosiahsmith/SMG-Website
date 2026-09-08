@@ -99,13 +99,14 @@ export function Nav() {
                 ))}
               </div>
             </div>
+            <Link href="/services/sarah" className={`${styles.link} ${isActive('/services/sarah') ? styles.active : ''}`}>AI Receptionist</Link>
             <Link href="/services" className={`${styles.link} ${isActive('/services') ? styles.active : ''}`}>Services</Link>
             <Link href="/how-it-works" className={`${styles.link} ${isActive('/how-it-works') ? styles.active : ''}`}>How It Works</Link>
             <Link href="/client-login" className={`${styles.link} ${isActive('/client-login') ? styles.active : ''}`}>Client Login</Link>
           </nav>
 
           <div className={styles.right}>
-            <Link href="/get-started" className={styles.cta}>Get Started</Link>
+            <Link href="tel:+13166695210" className={styles.cta}>Talk to Sarah</Link>
             <button type="button" className={styles.menuBtn} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen(v => !v)}>
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -118,10 +119,11 @@ export function Nav() {
         <div className={styles.sheetSub}>
           {ABOUT_LINKS.map(link => <Link key={link.href} href={link.href} className={isActive(link.href) ? styles.mobileActive : ''} onClick={closeMobile}>{link.label}</Link>)}
         </div>
+        <Link href="/services/sarah" className={isActive('/services/sarah') ? styles.mobileActive : ''} onClick={closeMobile}>AI Receptionist</Link>
         <Link href="/services" className={isActive('/services') ? styles.mobileActive : ''} onClick={closeMobile}>Services</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? styles.mobileActive : ''} onClick={closeMobile}>How It Works</Link>
         <Link href="/client-login" className={isActive('/client-login') ? styles.mobileActive : ''} onClick={closeMobile}>Client Login</Link>
-        <Link href="/get-started" className={styles.cta} onClick={closeMobile}>Get Started</Link>
+        <Link href="tel:+13166695210" className={styles.cta} onClick={closeMobile}>Talk to Sarah</Link>
       </div>
     </header>
   );
