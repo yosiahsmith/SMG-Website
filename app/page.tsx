@@ -21,22 +21,27 @@ export default function Home() {
             </div>
             <p className="hero-note">Ready to talk? <a href="https://calendly.com/solomedia-group/new-meeting" target="_blank" rel="noreferrer">Schedule a discovery call.</a></p>
           </div>
-          <div className="hero-system" aria-label="Sarah AI Receptionist workflow">
-            <div className="system-label">SARAH / AI RECEPTIONIST / INBOUND WORKFLOW</div>
-            <div className="flow-step flow-start"><span>01</span><div><strong>INBOUND CALL</strong><small>Customer reaches your business</small></div></div>
-            <div className="flow-connector" />
-            <div className="flow-step"><span>02</span><div><strong>SARAH ANSWERS</strong><small>Immediate response, no voicemail</small></div></div>
-            <div className="flow-connector" />
-            <div className="flow-split">
-              <div className="flow-branch"><b>ROUTINE</b><span>Questions & requests</span><em>→ Handled by Sarah</em></div>
-              <div className="flow-branch"><b>URGENT</b><span>Needs a human</span><em>→ Transferred to your team</em></div>
+          <div className="hero-system" aria-label="Interactive Sarah AI Receptionist workflow">
+            <div className="system-label">SARAH / AI RECEPTIONIST / LIVE WORKFLOW</div>
+            <div className="flow-phone" id="sarahFlow">
+              <div className="flow-phone-top"><span>SMG</span><span>INBOUND</span></div>
+              <div className="flow-screen">
+                <div className="flow-progress"><span id="flowProgress"></span></div>
+                <div className="flow-stage" id="flowStage">
+                  <div className="flow-icon">↗</div>
+                  <div className="flow-count" id="flowCount">01 / 05</div>
+                  <h3 id="flowTitle">INBOUND CALL</h3>
+                  <p id="flowText">A customer calls your business. Sarah answers immediately.</p>
+                </div>
+              </div>
+              <div className="flow-answer" id="flowAnswer">
+                <span className="flow-answer-track"><span className="flow-answer-knob">›</span></span>
+                <span>SWIPE TO ANSWER</span>
+              </div>
+              <button type="button" className="flow-next" id="flowNext">Tap to continue <ArrowRight size={15} /></button>
             </div>
-            <div className="flow-connector" />
-            <div className="flow-step"><span>03</span><div><strong>QUALIFY + BOOK</strong><small>Collect details and schedule the next step</small></div></div>
-            <div className="flow-connector" />
-            <div className="flow-step flow-result"><span>04</span><div><strong>APPOINTMENT SET</strong><small>Your team gets a cleaner, qualified conversation</small></div></div>
-            <p>Every call moves toward an outcome.</p>
-          </div>
+            <p className="flow-caption">Swipe through the conversation to see how Sarah moves a call toward an outcome.</p>
+          </div>          </div>
         </div>
       </section>
 
@@ -95,5 +100,32 @@ export default function Home() {
         </div>
       </section>
     </main>
+<script>
+(() => {
+  const root = document.getElementById('sarahFlow');
+  if (!root || root.dataset.ready) return;
+  root.dataset.ready = '1';
+  const stages = [
+    ['INBOUND CALL','A customer calls your business. Sarah answers immediately.','↗'],
+    ['SARAH ANSWERS','She greets the caller, understands why they called, and keeps the conversation moving.','◉'],
+    ['QUALIFY','Sarah gathers the information your team needs before the opportunity reaches a human.','◎'],
+    ['BOOK OR CONNECT','She books the appointment or routes the conversation to your team when a human is needed.','↔'],
+    ['APPOINTMENT SET','The caller gets a clear next step. Your team gets a cleaner conversation.','✓']
+  ];
+  let step=0, startX=0, dragging=false;
+  const title=document.getElementById('flowTitle'), text=document.getElementById('flowText'), count=document.getElementById('flowCount');
+  const icon=document.querySelector('.flow-icon'), progress=document.getElementById('flowProgress'), answer=document.getElementById('flowAnswer'), knob=document.querySelector('.flow-answer-knob'), next=document.getElementById('flowNext');
+  function render(){
+    const s=stages[step]; title.textContent=s[0]; text.textContent=s[1]; icon.textContent=s[2]; count.textContent=String(step+1).padStart(2,'0')+' / 05'; progress.style.width=((step+1)/stages.length*100)+'%';
+    answer.style.display=step===stages.length-1?'none':'flex'; next.style.display=step===stages.length-1?'none':'flex';
+  }
+  function advance(){ if(step<stages.length-1){step++; render();} }
+  answer.addEventListener('pointerdown',e=>{dragging=true;startX=e.clientX;answer.setPointerCapture(e.pointerId);});
+  answer.addEventListener('pointermove',e=>{if(!dragging)return; const dx=Math.max(0,Math.min(55,e.clientX-startX)); knob.style.transform='translateX('+dx+'px)'; if(dx>38){dragging=false;knob.style.transform='translateX(0)';advance();}});
+  answer.addEventListener('pointerup',()=>{dragging=false;knob.style.transform='translateX(0)';});
+  next.addEventListener('click',advance);
+  render();
+})();
+</script>
   );
 }
