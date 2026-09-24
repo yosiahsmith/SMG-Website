@@ -19,7 +19,7 @@ export default function Home() {
               <a className="btn" href="tel:+13166695210"><Phone size={16} /> Call the AI Receptionist <ArrowUpRight size={16} /></a>
               <Link className="btn secondary" href="/services/sarah">Meet Sarah <ArrowRight size={16} /></Link>
             </div>
-            <p className="hero-note">Call <a href="tel:+13166695210">(316) 669-5210</a> to hear the demo.</p>
+            <p className="hero-note">Call <a href="tel:+13166695210">(316) 669-5210</a> and try booking an appointment with Sarah.</p>
           </div>
           <div className="hero-system" aria-label="Sarah AI Receptionist workflow">
             <div className="system-label">SARAH / AI RECEPTIONIST</div>
@@ -86,8 +86,8 @@ export default function Home() {
 
       <section className="band band-home">
         <div className="shell band-grid">
-          <div><span className="eyebrow light-eyebrow">HEAR SARAH FOR YOURSELF</span><h2>Don't take our word for it. Call the demo.</h2></div>
-          <div><p>Call the demo line and experience the AI Receptionist firsthand. Then, when you're ready, we can build one around your business.</p><a className="btn darkbtn" href="tel:+13166695210"><Phone size={16} /> Call (316) 669-5210 <ArrowUpRight size={16} /></a></div>
+          <div><span className="eyebrow light-eyebrow">TALK TO SARAH</span><h2>Don't take our word for it. Call Sarah.</h2></div>
+          <div><p>Call Sarah as if you were one of your own inbound callers. Ask a question, request an appointment, or see how she handles the conversation from the first ring.</p><a className="btn darkbtn" href="tel:+13166695210"><Phone size={16} /> Call Sarah • (316) 669-5210 <ArrowUpRight size={16} /></a></div>
         </div>
       </section>
     </main>
