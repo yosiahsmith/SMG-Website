@@ -16,10 +16,10 @@ export default function Home() {
             <h1>AI Receptionists for businesses that <em>can't afford to miss a call.</em></h1>
             <p className="hero-lead">Sarah answers calls, handles routine questions, books appointments, and routes urgent conversations—so your business can stay responsive without adding another full-time employee.</p>
             <div className="actions">
-              <a className="btn" href="tel:+13166695210"><Phone size={16} /> Call the AI Receptionist <ArrowUpRight size={16} /></a>
+              <a className="btn" href="https://calendly.com/solomedia-group/new-meeting" target="_blank" rel="noreferrer"><Phone size={16} /> Schedule a Discovery Call <ArrowUpRight size={16} /></a>
               <Link className="btn secondary" href="/services/sarah">Meet Sarah <ArrowRight size={16} /></Link>
             </div>
-            <p className="hero-note">Call <a href="tel:+13166695210">(316) 669-5210</a> and try booking an appointment with Sarah.</p>
+            <p className="hero-note">Ready to talk? <a href="https://calendly.com/solomedia-group/new-meeting" target="_blank" rel="noreferrer">Schedule a discovery call.</a></p>
           </div>
           <div className="hero-system" aria-label="Sarah AI Receptionist workflow">
             <div className="system-label">SARAH / AI RECEPTIONIST</div>
@@ -86,8 +86,8 @@ export default function Home() {
 
       <section className="band band-home">
         <div className="shell band-grid">
-          <div><span className="eyebrow light-eyebrow">TALK TO SARAH</span><h2>Don't take our word for it. Call Sarah.</h2></div>
-          <div><p>Call Sarah as if you were one of your own inbound callers. Ask a question, request an appointment, or see how she handles the conversation from the first ring.</p><a className="btn darkbtn" href="tel:+13166695210"><Phone size={16} /> Call Sarah • (316) 669-5210 <ArrowUpRight size={16} /></a></div>
+          <div><span className="eyebrow light-eyebrow">START A CONVERSATION</span><h2>Let's talk about what your business needs.</h2></div>
+          <div><p>Tell us about your business, your current workflow, and where you want your front desk to perform better. We'll use the discovery call to map out the right next step.</p><a className="btn darkbtn" href="https://calendly.com/solomedia-group/new-meeting" target="_blank" rel="noreferrer"><Phone size={16} /> Schedule a Discovery Call <ArrowUpRight size={16} /></a></div>
         </div>
       </section>
     </main>
