@@ -35,8 +35,7 @@ export default function Home() {
                 </div>
               </div>
               <div className="flow-answer" id="flowAnswer">
-                <span className="flow-answer-track"><span className="flow-answer-knob">›</span></span>
-                <span>SWIPE TO ANSWER</span>
+                <span className="flow-answer-track"><span className="flow-answer-knob">›</span><span className="flow-answer-track-label">SWIPE RIGHT</span></span>
               </div>
               <button type="button" className="flow-next" id="flowNext">Tap to continue <ArrowRight size={15} /></button>
             </div>
