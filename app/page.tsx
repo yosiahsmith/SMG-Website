@@ -22,16 +22,20 @@ export default function Home() {
             <p className="hero-note">Ready to talk? <a href="https://calendly.com/solomedia-group/new-meeting" target="_blank" rel="noreferrer">Schedule a discovery call.</a></p>
           </div>
           <div className="hero-system" aria-label="Sarah AI Receptionist workflow">
-            <div className="system-label">SARAH / AI RECEPTIONIST</div>
-            <div className="system-node system-primary">ANSWER</div>
-            <div className="system-line" />
-            <div className="system-row">
-              <div className="system-node">QUALIFY</div>
-              <div className="system-node">BOOK</div>
+            <div className="system-label">SARAH / AI RECEPTIONIST / INBOUND WORKFLOW</div>
+            <div className="flow-step flow-start"><span>01</span><div><strong>INBOUND CALL</strong><small>Customer reaches your business</small></div></div>
+            <div className="flow-connector" />
+            <div className="flow-step"><span>02</span><div><strong>SARAH ANSWERS</strong><small>Immediate response, no voicemail</small></div></div>
+            <div className="flow-connector" />
+            <div className="flow-split">
+              <div className="flow-branch"><b>ROUTINE</b><span>Questions & requests</span><em>→ Handled by Sarah</em></div>
+              <div className="flow-branch"><b>URGENT</b><span>Needs a human</span><em>→ Transferred to your team</em></div>
             </div>
-            <div className="system-line short" />
-            <div className="system-node system-result">CONNECT</div>
-            <p>From the first ring to the next customer conversation.</p>
+            <div className="flow-connector" />
+            <div className="flow-step"><span>03</span><div><strong>QUALIFY + BOOK</strong><small>Collect details and schedule the next step</small></div></div>
+            <div className="flow-connector" />
+            <div className="flow-step flow-result"><span>04</span><div><strong>APPOINTMENT SET</strong><small>Your team gets a cleaner, qualified conversation</small></div></div>
+            <p>Every call moves toward an outcome.</p>
           </div>
         </div>
       </section>
