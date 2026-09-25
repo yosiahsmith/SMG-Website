@@ -55,7 +55,7 @@ export default function GetStartedForm() {
           <select name="interest" defaultValue="" required>
             <option value="" disabled>Select one</option>
             <option value="lead-acquisition">Lead Acquisition</option>
-            <option value="sarah">Sarah AI Receptionist</option>
+            <option value="sarah">Sarah Automatic Receptionist</option>
             <option value="both">Both</option>
             <option value="not-sure">Not sure yet</option>
           </select>
