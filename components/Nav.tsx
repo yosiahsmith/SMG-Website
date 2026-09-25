@@ -99,7 +99,7 @@ export function Nav() {
                 ))}
               </div>
             </div>
-            <Link href="/services/sarah" className={`${styles.link} ${isActive('/services/sarah') ? styles.active : ''}`}>AI Receptionist</Link>
+            <Link href="/services/sarah" className={`${styles.link} ${isActive('/services/sarah') ? styles.active : ''}`}>Automatic Receptionist</Link>
             <Link href="/services" className={`${styles.link} ${isActive('/services') ? styles.active : ''}`}>Services</Link>
             <Link href="/how-it-works" className={`${styles.link} ${isActive('/how-it-works') ? styles.active : ''}`}>How It Works</Link>
             <Link href="/client-login" className={`${styles.link} ${isActive('/client-login') ? styles.active : ''}`}>Client Login</Link>
@@ -119,7 +119,7 @@ export function Nav() {
         <div className={styles.sheetSub}>
           {ABOUT_LINKS.map(link => <Link key={link.href} href={link.href} className={isActive(link.href) ? styles.mobileActive : ''} onClick={closeMobile}>{link.label}</Link>)}
         </div>
-        <Link href="/services/sarah" className={isActive('/services/sarah') ? styles.mobileActive : ''} onClick={closeMobile}>AI Receptionist</Link>
+        <Link href="/services/sarah" className={isActive('/services/sarah') ? styles.mobileActive : ''} onClick={closeMobile}>Automatic Receptionist</Link>
         <Link href="/services" className={isActive('/services') ? styles.mobileActive : ''} onClick={closeMobile}>Services</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? styles.mobileActive : ''} onClick={closeMobile}>How It Works</Link>
         <Link href="/client-login" className={isActive('/client-login') ? styles.mobileActive : ''} onClick={closeMobile}>Client Login</Link>
