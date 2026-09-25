@@ -8,7 +8,7 @@ export const metadata: Metadata = {
     default: 'Solomon Media Group',
     template: '%s | Solomon Media Group',
   },
-  description: 'Solomon Media Group builds lead generation, AI receptionist, automation, and growth systems for modern businesses.',
+  description: 'Solomon Media Group builds lead generation, Automatic receptionist, automation, and growth systems for modern businesses.',
   applicationName: 'Solomon Media Group',
   icons: {
     icon: '/icon.svg',
