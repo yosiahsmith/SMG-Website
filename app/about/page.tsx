@@ -13,7 +13,7 @@ export default function About() {
 
         <section className="about-founder">
           <div><span className="eyebrow">THE COMPANY</span><h2>Small by design.<br /><em>Serious about the system.</em></h2></div>
-          <div><p>SMG is currently a solo-founder-run company led by Yosiah Smith in Wichita, Kansas. This is the first year the company is pushing toward real revenue, and the focus is on building infrastructure that can grow with it.</p><p>The work is intentionally narrow: Lead Acquisition and Sarah AI Receptionist, supported by the systems, automation, and technology needed to make those offerings useful.</p></div>
+          <div><p>SMG is currently a solo-founder-run company led by Yosiah Smith in Wichita, Kansas. This is the first year the company is pushing toward real revenue, and the focus is on building infrastructure that can grow with it.</p><p>The work is intentionally narrow: Lead Acquisition and Sarah Automatic Receptionist, supported by the systems, automation, and technology needed to make those offerings useful.</p></div>
         </section>
 
         <section className="about-principles">
