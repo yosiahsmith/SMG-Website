@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import { ArrowUpRight, ArrowRight, Phone } from 'lucide-react';
+import SarahFlow from '../components/SarahFlow';
 
 export const metadata = {
-  title: 'AI Receptionists for Businesses | Solomon Media Group',
-  description: 'Solomon Media Group builds AI Receptionists for businesses that cannot afford to miss a call.',
+  title: 'Automatic Receptionists for Businesses | Solomon Media Group',
+  description: 'Solomon Media Group builds Automatic Receptionists for businesses that cannot afford to miss a call.',
 };
 
 export default function Home() {
@@ -12,8 +13,8 @@ export default function Home() {
       <section className="hero hero-home">
         <div className="shell hero-grid">
           <div className="hero-copy">
-            <span className="eyebrow">SOLOMON MEDIA GROUP / AI RECEPTIONISTS</span>
-            <h1>AI Receptionists for businesses that <em>can't afford to miss a call.</em></h1>
+            <span className="eyebrow">SOLOMON MEDIA GROUP / AUTOMATIC RECEPTIONISTS</span>
+            <h1>Automatic Receptionists for businesses that <em>can't afford to miss a call.</em></h1>
             <p className="hero-lead">Sarah answers calls, handles routine questions, books appointments, and routes urgent conversations—so your business can stay responsive without adding another full-time employee.</p>
             <div className="actions">
               <a className="btn" href="https://calendly.com/solomedia-group/new-meeting" target="_blank" rel="noreferrer"><Phone size={16} /> Schedule a Discovery Call <ArrowUpRight size={16} /></a>
@@ -21,26 +22,7 @@ export default function Home() {
             </div>
             <p className="hero-note">Ready to talk? <a href="https://calendly.com/solomedia-group/new-meeting" target="_blank" rel="noreferrer">Schedule a discovery call.</a></p>
           </div>
-          <div className="hero-system" aria-label="Interactive Sarah AI Receptionist workflow">
-            <div className="system-label">SARAH / AI RECEPTIONIST / LIVE WORKFLOW</div>
-            <div className="flow-phone" id="sarahFlow">
-              <div className="flow-phone-top"><span>SMG</span><span>INBOUND</span></div>
-              <div className="flow-screen">
-                <div className="flow-progress"><span id="flowProgress"></span></div>
-                <div className="flow-stage" id="flowStage">
-                  <div className="flow-icon">↗</div>
-                  <div className="flow-count" id="flowCount">01 / 05</div>
-                  <h3 id="flowTitle">INBOUND CALL</h3>
-                  <p id="flowText">A customer calls your business. Sarah answers immediately.</p>
-                </div>
-              </div>
-              <div className="flow-answer" id="flowAnswer">
-                <span className="flow-answer-track"><span className="flow-answer-knob">›</span><span className="flow-answer-track-label">SWIPE RIGHT</span></span>
-              </div>
-              <button type="button" className="flow-next" id="flowNext">Tap to continue <ArrowRight size={15} /></button>
-            </div>
-            <p className="flow-caption">Swipe through the conversation to see how Sarah moves a call toward an outcome.</p>
-          </div>          </div>
+          <SarahFlow />
         </div>
       </section>
 
@@ -50,7 +32,7 @@ export default function Home() {
             <span className="eyebrow">THE PRIMARY OFFER</span>
             <h2>Never let a good call<br />go unanswered.</h2>
           </div>
-          <p>Sarah is SMG's flagship service: an AI Receptionist built to answer inbound calls, handle common questions, qualify callers, schedule appointments, and transfer urgent conversations when they matter.</p>
+          <p>Sarah is SMG's flagship service: an Automatic Receptionist built to answer inbound calls, handle common questions, qualify callers, schedule appointments, and transfer urgent conversations when they matter.</p>
         </div>
       </section>
 
@@ -59,7 +41,7 @@ export default function Home() {
           <Link className="offer-card offer-featured" href="/services/sarah">
             <div className="offer-number">01</div>
             <div>
-              <span className="offer-kicker">SARAH / AI RECEPTIONIST</span>
+              <span className="offer-kicker">SARAH / AUTOMATIC RECEPTIONIST</span>
               <h3>Your front desk, without another full-time employee.</h3>
               <p>Inbound calls, scheduling, confirmations, routine conversations, and intelligent routing handled around the clock.</p>
             </div>
@@ -99,32 +81,5 @@ export default function Home() {
         </div>
       </section>
     </main>
-<script>
-(() => {
-  const root = document.getElementById('sarahFlow');
-  if (!root || root.dataset.ready) return;
-  root.dataset.ready = '1';
-  const stages = [
-    ['INBOUND CALL','A customer calls your business. Sarah answers immediately.','↗'],
-    ['SARAH ANSWERS','She greets the caller, understands why they called, and keeps the conversation moving.','◉'],
-    ['QUALIFY','Sarah gathers the information your team needs before the opportunity reaches a human.','◎'],
-    ['BOOK OR CONNECT','She books the appointment or routes the conversation to your team when a human is needed.','↔'],
-    ['APPOINTMENT SET','The caller gets a clear next step. Your team gets a cleaner conversation.','✓']
-  ];
-  let step=0, startX=0, dragging=false;
-  const title=document.getElementById('flowTitle'), text=document.getElementById('flowText'), count=document.getElementById('flowCount');
-  const icon=document.querySelector('.flow-icon'), progress=document.getElementById('flowProgress'), answer=document.getElementById('flowAnswer'), knob=document.querySelector('.flow-answer-knob'), next=document.getElementById('flowNext');
-  function render(){
-    const s=stages[step]; title.textContent=s[0]; text.textContent=s[1]; icon.textContent=s[2]; count.textContent=String(step+1).padStart(2,'0')+' / 05'; progress.style.width=((step+1)/stages.length*100)+'%';
-    answer.style.display=step===stages.length-1?'none':'flex'; next.style.display=step===stages.length-1?'none':'flex';
-  }
-  function advance(){ if(step<stages.length-1){step++; render();} }
-  answer.addEventListener('pointerdown',e=>{dragging=true;startX=e.clientX;answer.setPointerCapture(e.pointerId);});
-  answer.addEventListener('pointermove',e=>{if(!dragging)return; const dx=Math.max(0,Math.min(55,e.clientX-startX)); knob.style.transform='translateX('+dx+'px)'; if(dx>38){dragging=false;knob.style.transform='translateX(0)';advance();}});
-  answer.addEventListener('pointerup',()=>{dragging=false;knob.style.transform='translateX(0)';});
-  next.addEventListener('click',advance);
-  render();
-})();
-</script>
   );
 }
