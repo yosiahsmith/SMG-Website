@@ -15,7 +15,7 @@ export default function GetStarted() {
 
         <section className="start-options">
           <div className="start-option"><span>01</span><h2>Need more qualified demand?</h2><p>Explore Lead Acquisition: paid acquisition, qualification, and job booking built into one connected offer.</p></div>
-          <div className="start-option"><span>02</span><h2>Missing calls or booking opportunities?</h2><p>Explore Sarah: an AI receptionist for inbound calls, scheduling, confirmations, and transfers.</p></div>
+          <div className="start-option"><span>02</span><h2>Missing calls or booking opportunities?</h2><p>Explore Sarah: an Automatic receptionist for inbound calls, scheduling, confirmations, and transfers.</p></div>
         </section>
 
         <section className="start-form-section">
