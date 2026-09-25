@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight } from 'lucide-react';
 
-export const metadata = { title: 'Services', description: 'Explore Solomon Media Group Lead Acquisition and Sarah AI Receptionist.' };
+export const metadata = { title: 'Services', description: 'Explore Solomon Media Group Lead Acquisition and Sarah Automatic Receptionist.' };
 
 export default function Services() {
   return (
