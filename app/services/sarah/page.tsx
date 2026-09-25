@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import { ArrowUpRight, ArrowRight, Phone, CalendarDays, MessageSquareText, ArrowLeftRight } from 'lucide-react';
 
-export const metadata = { title: 'Sarah AI Receptionist', description: 'Meet Sarah, Solomon Media Group’s AI receptionist for inbound calls, scheduling, confirmations, and transfers.' };
+export const metadata = { title: 'Sarah Automatic Receptionist', description: 'Meet Sarah, Solomon Media Group’s Automatic receptionist for inbound calls, scheduling, confirmations, and transfers.' };
 
 const capabilities = [
   ['01', 'Answers calls', 'Give callers a professional first response without forcing your team to answer every routine call.'],
@@ -16,7 +16,7 @@ export default function Sarah() {
       <div className="shell">
         <span className="eyebrow">SMG / SARAH AI RECEPTIONIST</span>
         <h1>Never let a ringing phone<br /><em>become a lost opportunity.</em></h1>
-        <p className="lead">Sarah is SMG's AI receptionist—built to handle inbound conversations, scheduling, confirmations, transfers, and the routine work that keeps your team from answering every call.</p>
+        <p className="lead">Sarah is SMG's Automatic receptionist—built to handle inbound conversations, scheduling, confirmations, transfers, and the routine work that keeps your team from answering every call.</p>
 
         <section className="sarah-console">
           <div className="console-head"><span>LIVE RECEPTIONIST</span><i /></div>
