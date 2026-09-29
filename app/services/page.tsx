@@ -19,8 +19,8 @@ export default function Services() {
           </Link>
 
           <Link className="service-large-card sarah-card" href="/services/sarah">
-            <div className="service-card-top"><span>02 / SARAH AI RECEPTIONIST</span><ArrowUpRight size={21} /></div>
-            <div className="service-card-body"><h2>Your always-on<br /><em>front desk.</em></h2><p>Sarah answers inbound calls, handles routine questions, schedules appointments, sends confirmations, transfers calls, and helps businesses capture opportunities that would otherwise be missed.</p></div>
+            <div className="service-card-top"><span>02 / SARAH / AUTOMATIC RECEPTIONIST</span><ArrowUpRight size={21} /></div>
+            <div className="service-image-wrap"><img src="/sarah/sarah-portrait.webp" alt="Sarah, SMG's Automatic Receptionist" /></div><div className="service-card-body"><h2>Your always-on<br /><em>front desk.</em></h2><p>Sarah answers inbound calls, handles routine questions, schedules appointments, sends confirmations, transfers calls, and helps businesses capture opportunities that would otherwise be missed.</p></div>
             <div className="service-card-bottom"><span>Calls</span><span>Scheduling</span><span>Confirmations</span><span>Transfers</span></div>
           </Link>
         </section>
