@@ -114,7 +114,7 @@ export function Nav() {
         </div>
       </div>
 
-      <div className={`${styles.sheet} ${mobileOpen ? styles.sheetOpen : ''}`} aria-hidden={!mobileOpen}>
+      </header>\n\n      <div className={`${styles.sheet} ${mobileOpen ? styles.sheetOpen : ''}`} aria-hidden={!mobileOpen}>
         <Link href="/about" className={isActive('/about') ? styles.mobileActive : ''} onClick={closeMobile}>About</Link>
         <div className={styles.sheetSub}>
           {ABOUT_LINKS.map(link => <Link key={link.href} href={link.href} className={isActive(link.href) ? styles.mobileActive : ''} onClick={closeMobile}>{link.label}</Link>)}
