@@ -41,7 +41,6 @@ export default function SarahFlow() {
     const trackTravel = 162;
     const dx = Math.max(0, Math.min(trackTravel, event.clientX - startX));
     setDragX(dx);
-    if (dx >= trackTravel) setDragX(trackTravel);
   };
 
   const resetDrag = () => {
@@ -69,15 +68,15 @@ export default function SarahFlow() {
             <p className="flow-word-reveal flow-description">{stage[1].split(' ').map((word, index) => <span key={word + index} style={{ animationDelay: `${280 + index * 70}ms` }}>{word}</span>)}</p>
           </div>
         </div>
-        {step < stages.length - 1 ? (
-          <>
+        <div className="flow-action-slot">
+          {step < stages.length - 1 ? (
             <div className="flow-answer" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={resetDrag} onPointerCancel={resetDrag}>
               <span className="flow-answer-track"><span className={`flow-answer-knob ${startX !== null ? "flow-answer-knob-dragging" : ""}`} style={{ transform: `translateX(${dragX}px)` }}>›</span><span className="flow-answer-track-label" style={{ opacity: dragX > 0 ? Math.max(0, 1 - dragX / 72) : 1 }}>SWIPE RIGHT</span></span>
             </div>
-          </>
-        ) : (
-          <button type="button" className="flow-restart" onClick={startOver}><RotateCcw size={13} /> Start over</button>
-        )}
+          ) : (
+            <button type="button" className="flow-restart" onClick={startOver}><RotateCcw size={13} /> Start over</button>
+          )}
+        </div>
       </div>
     </div>
   );
