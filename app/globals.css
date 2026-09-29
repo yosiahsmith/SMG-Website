@@ -70,3 +70,13 @@
 .flow-word-reveal span{display:inline-block;opacity:0;filter:blur(5px);transform:translateY(9px);animation:sarahWordReveal .8s cubic-bezier(.22,1,.36,1) forwards}
 .flow-description{gap:.24em;line-height:1.55}
 @keyframes sarahWordReveal{to{opacity:1;filter:blur(0);transform:translateY(0)}}
+
+/* Apple-inspired swipe affordance */
+.flow-answer-track{isolation:isolate}
+.flow-answer-track:after{content:'';position:absolute;inset:0;border-radius:999px;background:linear-gradient(100deg,transparent 18%,rgba(255,255,255,.12) 45%,rgba(255,255,255,.34) 50%,rgba(255,255,255,.12) 55%,transparent 82%);transform:translateX(-120%);animation:swipeHint 2.4s cubic-bezier(.4,0,.2,1) infinite;pointer-events:none;z-index:1}
+.flow-answer-knob{animation:swipeKnobHint 2.4s cubic-bezier(.4,0,.2,1) infinite}
+.flow-answer-track-label{transition:opacity .3s ease;z-index:3}
+@keyframes swipeHint{0%,22%{transform:translateX(-120%);opacity:0}32%{opacity:1}62%{transform:translateX(120%);opacity:1}72%,100%{transform:translateX(120%);opacity:0}}
+@keyframes swipeKnobHint{0%,22%{transform:translateX(0)}48%{transform:translateX(12px)}62%{transform:translateX(0)}72%,100%{transform:translateX(0)}}
+.flow-answer:hover .flow-answer-track:after{animation-duration:1.5s}
+.flow-answer:active .flow-answer-knob{animation:none}
