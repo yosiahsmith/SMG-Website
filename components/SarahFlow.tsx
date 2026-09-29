@@ -62,7 +62,7 @@ export default function SarahFlow() {
         {step < stages.length - 1 ? (
           <>
             <div className="flow-answer" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={resetDrag} onPointerCancel={resetDrag}>
-              <span className="flow-answer-track"><span className="flow-answer-knob" style={{ transform: `translateX(${dragX}px)` }}>›</span><span className="flow-answer-track-label">SWIPE RIGHT</span></span>
+              <span className="flow-answer-track"><span className={`flow-answer-knob ${startX !== null ? "flow-answer-knob-dragging" : ""}`} style={{ transform: `translateX(${dragX}px)` }}>›</span><span className="flow-answer-track-label">SWIPE RIGHT</span></span>
             </div>
           </>
         ) : (
