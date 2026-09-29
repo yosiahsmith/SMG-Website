@@ -41,10 +41,20 @@ export default function SarahFlow() {
     const trackTravel = 162;
     const dx = Math.max(0, Math.min(trackTravel, event.clientX - startX));
     setDragX(dx);
-    if (dx >= trackTravel - 2) { setStartX(null); advance(); }
+    if (dx >= trackTravel) setDragX(trackTravel);
   };
 
-  const resetDrag = () => { if (startX !== null) setDragX(0); setStartX(null); };
+  const resetDrag = () => {
+    if (startX !== null) {
+      const trackTravel = 162;
+      if (dragX >= trackTravel) {
+        advance();
+      } else {
+        setDragX(0);
+        setStartX(null);
+      }
+    }
+  };
 
   return (
     <div className="hero-system" aria-label="Interactive Sarah Automatic Receptionist workflow">
@@ -62,7 +72,7 @@ export default function SarahFlow() {
         {step < stages.length - 1 ? (
           <>
             <div className="flow-answer" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={resetDrag} onPointerCancel={resetDrag}>
-              <span className="flow-answer-track"><span className={`flow-answer-knob ${startX !== null ? "flow-answer-knob-dragging" : ""}`} style={{ transform: `translateX(${dragX}px)` }}>›</span><span className="flow-answer-track-label">SWIPE RIGHT</span></span>
+              <span className="flow-answer-track"><span className={`flow-answer-knob ${startX !== null ? "flow-answer-knob-dragging" : ""}`} style={{ transform: `translateX(${dragX}px)` }}>›</span><span className="flow-answer-track-label" style={{ opacity: dragX > 0 ? Math.max(0, 1 - dragX / 72) : 1 }}>SWIPE RIGHT</span></span>
             </div>
           </>
         ) : (
