@@ -28,11 +28,7 @@ export default function SarahFlow() {
     }, 180);
   };
 
-  const startOver = () => {
-    setStep(0);
-    setDragX(0);
-    setStartX(null);
-  };
+  const startOver = () => { setStep(0); setDragX(0); setStartX(null); };
 
   const onPointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     if (step === stages.length - 1 || animating) return;
@@ -45,24 +41,17 @@ export default function SarahFlow() {
     const trackTravel = 162;
     const dx = Math.max(0, Math.min(trackTravel, event.clientX - startX));
     setDragX(dx);
-    if (dx >= trackTravel - 2) {
-      setStartX(null);
-      advance();
-    }
+    if (dx >= trackTravel - 2) { setStartX(null); advance(); }
   };
 
-  const resetDrag = () => {
-    if (startX !== null) setDragX(0);
-    setStartX(null);
-  };
+  const resetDrag = () => { if (startX !== null) setDragX(0); setStartX(null); };
 
   return (
     <div className="hero-system" aria-label="Interactive Sarah Automatic Receptionist workflow">
       <div className="system-label">SARAH / AUTOMATIC RECEPTIONIST / LIVE WORKFLOW</div>
-      <div className="flow-phone">
-        <div className="flow-phone-top"><span>SMG</span><span>INBOUND</span></div>
-        <div className="flow-screen">
-          <div className="flow-progress"><span style={{ width: ((step + 1) / stages.length) * 100 + '%' }} /></div>
+      <div className="flow-panel">
+        <div className="flow-progress"><span style={{ width: ((step + 1) / stages.length) * 100 + '%' }} /></div>
+        <div className="flow-stage-wrap">
           <div className={`flow-stage ${animating ? 'flow-stage-exit' : 'flow-stage-enter'}`} key={step}>
             <div className="flow-icon">{stage[2]}</div>
             <div className="flow-count">{String(step + 1).padStart(2, '0')} / 05</div>
@@ -70,21 +59,15 @@ export default function SarahFlow() {
             <p>{stage[1]}</p>
           </div>
         </div>
-
         {step < stages.length - 1 ? (
           <>
             <div className="flow-answer" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={resetDrag} onPointerCancel={resetDrag}>
-              <span className="flow-answer-track">
-                <span className="flow-answer-knob" style={{ transform: `translateX(${dragX}px)` }}>›</span>
-                <span className="flow-answer-track-label">SWIPE RIGHT</span>
-              </span>
+              <span className="flow-answer-track"><span className="flow-answer-knob" style={{ transform: `translateX(${dragX}px)` }}>›</span><span className="flow-answer-track-label">SWIPE RIGHT</span></span>
             </div>
             <button type="button" className="flow-next" onClick={advance}>Tap to continue <ArrowRight size={15} /></button>
           </>
         ) : (
-          <button type="button" className="flow-restart" onClick={startOver}>
-            <RotateCcw size={13} /> Start over
-          </button>
+          <button type="button" className="flow-restart" onClick={startOver}><RotateCcw size={13} /> Start over</button>
         )}
       </div>
       <p className="flow-caption">{step === stages.length - 1 ? 'Presentation complete. Start over to walk through the workflow again.' : 'Swipe the circle all the way to the right to continue.'}</p>
