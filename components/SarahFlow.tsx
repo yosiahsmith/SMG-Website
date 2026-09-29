@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowRight, RotateCcw } from 'lucide-react';
+import { RotateCcw } from 'lucide-react';
 
 const stages = [
   ['INBOUND CALL','A customer calls your business. Sarah answers immediately.','↗'],
@@ -64,13 +64,11 @@ export default function SarahFlow() {
             <div className="flow-answer" onPointerDown={onPointerDown} onPointerMove={onPointerMove} onPointerUp={resetDrag} onPointerCancel={resetDrag}>
               <span className="flow-answer-track"><span className="flow-answer-knob" style={{ transform: `translateX(${dragX}px)` }}>›</span><span className="flow-answer-track-label">SWIPE RIGHT</span></span>
             </div>
-            <button type="button" className="flow-next" onClick={advance}>Tap to continue <ArrowRight size={15} /></button>
           </>
         ) : (
           <button type="button" className="flow-restart" onClick={startOver}><RotateCcw size={13} /> Start over</button>
         )}
       </div>
-      <p className="flow-caption">{step === stages.length - 1 ? 'Presentation complete. Start over to walk through the workflow again.' : 'Swipe the circle all the way to the right to continue.'}</p>
     </div>
   );
 }
