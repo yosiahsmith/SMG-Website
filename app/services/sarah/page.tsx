@@ -1,7 +1,10 @@
 import Link from 'next/link';
 import { ArrowUpRight, ArrowRight, Phone, CalendarDays, MessageSquareText, ArrowLeftRight } from 'lucide-react';
 
-export const metadata = { title: 'Sarah Automatic Receptionist', description: 'Meet Sarah, Solomon Media Group’s Automatic receptionist for inbound calls, scheduling, confirmations, and transfers.' };
+export const metadata = {
+  title: 'Sarah Automatic Receptionist',
+  description: 'Meet Sarah, Solomon Media Group’s Automatic Receptionist for inbound calls, scheduling, confirmations, and transfers.',
+};
 
 const capabilities = [
   ['01', 'Answers calls', 'Give callers a professional first response without forcing your team to answer every routine call.'],
@@ -14,9 +17,26 @@ export default function Sarah() {
   return (
     <main className="page service-detail-page sarah-detail">
       <div className="shell">
-        <span className="eyebrow">SMG / SARAH AI RECEPTIONIST</span>
-        <h1>Never let a ringing phone<br /><em>become a lost opportunity.</em></h1>
-        <p className="lead">Sarah is SMG's Automatic receptionist—built to handle inbound conversations, scheduling, confirmations, transfers, and the routine work that keeps your team from answering every call.</p>
+        <section className="sarah-hero">
+          <div className="sarah-hero-copy">
+            <span className="eyebrow">SMG / SARAH / AUTOMATIC RECEPTIONIST</span>
+            <h1>Never let a ringing phone<br /><em>become a lost opportunity.</em></h1>
+            <p className="lead">Sarah is SMG's Automatic Receptionist, built to handle inbound conversations, scheduling, confirmations, transfers, and the routine work that keeps your team from answering every call.</p>
+            <div className="actions page-actions">
+              <Link className="btn" href="/get-started">Get Sarah <ArrowUpRight size={16} /></Link>
+              <a className="text-link" href="https://calendly.com/solomedia-group/new-meeting" target="_blank" rel="noreferrer">Schedule a Discovery Call <ArrowUpRight size={15} /></a>
+            </div>
+          </div>
+          <div className="sarah-hero-visual">
+            <div className="sarah-portrait-frame">
+              <img src="/sarah/sarah-portrait.webp" alt="Sarah, Solomon Media Group's Automatic Receptionist" />
+              <div className="sarah-image-badge">
+                <span>ACTIVE AGENT</span>
+                <strong>Sarah</strong>
+              </div>
+            </div>
+          </div>
+        </section>
 
         <section className="sarah-console">
           <div className="console-head"><span>LIVE RECEPTIONIST</span><i /></div>
@@ -26,11 +46,33 @@ export default function Sarah() {
           </div>
         </section>
 
-        <section className="detail-process"><div className="section-head compact-head"><div><span className="eyebrow">WHAT SARAH DOES</span><h2>A receptionist<br />built around your business.</h2></div><p>Sarah is tailored around your business information, services, hours, policies, and booking behavior.</p></div><div className="process-list">{capabilities.map(([n,t,d]) => <div className="process-row" key={n}><span className="process-no">{n}</span><h3>{t}</h3><p>{d}</p></div>)}</div></section>
+        <section className="sarah-gallery-section">
+          <div className="section-head compact-head">
+            <div><span className="eyebrow">MEET SARAH</span><h2>One receptionist.<br /><em>Every side of the job.</em></h2></div>
+            <p>Sarah can be presented as part of the brand, part of the front desk, and part of the workflow your customers experience.</p>
+          </div>
+          <div className="sarah-gallery-frame">
+            <img src="/sarah/sarah-gallery.webp" alt="Sarah in four professional receptionist settings wearing a headset" />
+            <div className="sarah-gallery-caption">Professional. Warm. Always ready to answer.</div>
+          </div>
+        </section>
 
-        <section className="pricing-panel"><div><span className="eyebrow">SARAH</span><h2>Starts at<br />$997 / month</h2><p>Plus a one-time $225 setup/service charge. Tiered pricing may be introduced as the product expands.</p></div><div className="pricing-side"><span>BUILT FOR</span><strong>Businesses where a missed call can mean a missed customer.</strong></div></section>
+        <section className="detail-process">
+          <div className="section-head compact-head">
+            <div><span className="eyebrow">WHAT SARAH DOES</span><h2>A receptionist<br />built around your business.</h2></div>
+            <p>Sarah is tailored around your business information, services, hours, policies, and booking behavior.</p>
+          </div>
+          <div className="process-list">
+            {capabilities.map(([n,t,d]) => <div className="process-row" key={n}><span className="process-no">{n}</span><h3>{t}</h3><p>{d}</p></div>)}
+          </div>
+        </section>
 
-        <div className="actions page-actions"><Link className="btn" href="/get-started">Get Sarah <ArrowUpRight size={16} /></Link><Link className="textlink" href="/services">Back to services <ArrowRight size={15} /></Link></div>
+        <section className="pricing-panel">
+          <div><span className="eyebrow">SARAH</span><h2>Starts at<br />$997 / month</h2><p>Plus a one-time $225 setup/service charge. Tiered pricing may be introduced as the product expands.</p></div>
+          <div className="pricing-side"><span>BUILT FOR</span><strong>Businesses where a missed call can mean a missed customer.</strong></div>
+        </section>
+
+        <div className="actions page-actions"><Link className="text-link" href="/services">Back to services <ArrowRight size={15} /></Link></div>
       </div>
     </main>
   );
