@@ -54,3 +54,12 @@
 @keyframes sarahStageIn{from{opacity:0;transform:translateX(18px) scale(.985);filter:blur(4px)}to{opacity:1;transform:translateX(0) scale(1);filter:blur(0)}}
 @keyframes sarahStageOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-12px)}}
 @keyframes sarahIconIn{from{opacity:0;transform:scale(.72) rotate(-8deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+
+/* Final Sarah workflow panel */
+.flow-panel{position:relative;max-width:430px;margin:0 auto;padding:34px 28px 20px;border:1px solid rgba(255,255,255,.13);border-radius:20px;background:linear-gradient(145deg,rgba(255,255,255,.055),rgba(255,255,255,.012));box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 24px 60px rgba(0,0,0,.2);overflow:hidden}
+.flow-panel .flow-progress{height:2px;background:rgba(255,255,255,.1);width:100%;position:relative;max-width:none;margin-bottom:28px;overflow:hidden;border-radius:999px;align-self:auto}
+.flow-panel .flow-progress span{display:block;height:100%;background:rgba(255,255,255,.78);transition:width .45s cubic-bezier(.22,1,.36,1)}
+.flow-stage-wrap{min-height:265px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.flow-panel .flow-stage{position:relative;text-align:center;width:100%;padding:8px 0}
+.flow-panel .flow-icon{width:52px;height:52px;margin:0 auto 18px;border:1px solid rgba(255,255,255,.2);border-radius:50%;display:grid;place-items:center;font-size:22px}
+.flow-panel .flow-stage p{max-width:290px}
