@@ -79,7 +79,8 @@ export function Nav() {
   const aboutActive = pathname.startsWith('/about') || pathname.startsWith('/team') || pathname.startsWith('/careers') || pathname.startsWith('/contact');
 
   return (
-    <header className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
+    <>
+      <header className={`${styles.nav} ${scrolled ? styles.navScrolled : ''}`}>
       <div className={styles.inner}>
         <Link href="/" className={styles.brand} onClick={closeMobile} aria-label="Solomon Media Group home">
           <LogoMark />
@@ -114,7 +115,9 @@ export function Nav() {
         </div>
       </div>
 
-      </header>\n\n      <div className={`${styles.sheet} ${mobileOpen ? styles.sheetOpen : ''}`} aria-hidden={!mobileOpen}>
+      </header>
+
+      <div className={`${styles.sheet} ${mobileOpen ? styles.sheetOpen : ''}`} aria-hidden={!mobileOpen}>
         <Link href="/about" className={isActive('/about') ? styles.mobileActive : ''} onClick={closeMobile}>About</Link>
         <div className={styles.sheetSub}>
           {ABOUT_LINKS.map(link => <Link key={link.href} href={link.href} className={isActive(link.href) ? styles.mobileActive : ''} onClick={closeMobile}>{link.label}</Link>)}
@@ -125,6 +128,6 @@ export function Nav() {
         <Link href="/client-login" className={isActive('/client-login') ? styles.mobileActive : ''} onClick={closeMobile}>Client Login</Link>
         <Link href="tel:+13166695210" className={styles.cta} onClick={closeMobile}>Talk to Sarah</Link>
       </div>
-    </header>
+    </>
   );
 }
