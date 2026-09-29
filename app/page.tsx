@@ -40,6 +40,7 @@ export default function Home() {
         <div className="shell offer-grid">
           <Link className="offer-card offer-featured" href="/services/sarah">
             <div className="offer-number">01</div>
+            <div className="offer-image"><img src="/sarah/sarah-portrait.webp" alt="Sarah, SMG's Automatic Receptionist" /></div>
             <div>
               <span className="offer-kicker">SARAH / AUTOMATIC RECEPTIONIST</span>
               <h3>Your front desk, without another full-time employee.</h3>
