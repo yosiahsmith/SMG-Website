@@ -55,8 +55,8 @@ export default function SarahFlow() {
           <div className={`flow-stage ${animating ? 'flow-stage-exit' : 'flow-stage-enter'}`} key={step}>
             <div className="flow-icon">{stage[2]}</div>
             <div className="flow-count">{String(step + 1).padStart(2, '0')} / 05</div>
-            <h3 className="flow-word-reveal">{stage[0].split(' ').map((word, index) => <span key={word + index} style={{ animationDelay: `${index * 110}ms` }}>{word}</span>)}</h3>
-            <p className="flow-word-reveal flow-description">{stage[1].split(' ').map((word, index) => <span key={word + index} style={{ animationDelay: `${220 + index * 55}ms` }}>{word}</span>)}</p>
+            <h3 className="flow-word-reveal">{stage[0].split(' ').map((word, index) => <span key={word + index} style={{ animationDelay: `${index * 145}ms` }}>{word}</span>)}</h3>
+            <p className="flow-word-reveal flow-description">{stage[1].split(' ').map((word, index) => <span key={word + index} style={{ animationDelay: `${280 + index * 70}ms` }}>{word}</span>)}</p>
           </div>
         </div>
         {step < stages.length - 1 ? (
