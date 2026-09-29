@@ -67,6 +67,6 @@
 /* Word-by-word Sarah text reveal */
 .flow-panel{max-width:500px}
 .flow-word-reveal{display:flex;justify-content:center;flex-wrap:wrap;gap:.28em;overflow:visible}
-.flow-word-reveal span{display:inline-block;opacity:0;filter:blur(5px);transform:translateY(9px);animation:sarahWordReveal .65s cubic-bezier(.22,1,.36,1) forwards}
+.flow-word-reveal span{display:inline-block;opacity:0;filter:blur(5px);transform:translateY(9px);animation:sarahWordReveal .8s cubic-bezier(.22,1,.36,1) forwards}
 .flow-description{gap:.24em;line-height:1.55}
 @keyframes sarahWordReveal{to{opacity:1;filter:blur(0);transform:translateY(0)}}
