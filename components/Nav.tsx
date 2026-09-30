@@ -107,7 +107,7 @@ export function Nav() {
           </nav>
 
           <div className={styles.right}>
-            <Link href="tel:+13166695210" className={styles.cta}>Talk to Sarah</Link>
+            <Link href="https://calendly.com/solomedia-group/new-meeting" className={styles.cta}>Book Now</Link>
             <button type="button" className={styles.menuBtn} aria-label={mobileOpen ? 'Close menu' : 'Open menu'} aria-expanded={mobileOpen} onClick={() => setMobileOpen(v => !v)}>
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -126,7 +126,7 @@ export function Nav() {
         <Link href="/services" className={isActive('/services') ? styles.mobileActive : ''} onClick={closeMobile}>Services</Link>
         <Link href="/how-it-works" className={isActive('/how-it-works') ? styles.mobileActive : ''} onClick={closeMobile}>How It Works</Link>
         <Link href="/client-login" className={isActive('/client-login') ? styles.mobileActive : ''} onClick={closeMobile}>Client Login</Link>
-        <Link href="tel:+13166695210" className={styles.cta} onClick={closeMobile}>Talk to Sarah</Link>
+        <Link href="https://calendly.com/solomedia-group/new-meeting" className={styles.cta} onClick={closeMobile}>Book Now</Link>
       </div>
     </>
   );
